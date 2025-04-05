@@ -26,6 +26,25 @@ A lightweight, self-hosted Python Flask web app that provides a dashboard to run
 - **Flask-WTF** for forms
 
 ---
+---
+
+## 🔧 Install Pentesting Tools
+
+Make sure the following tools are installed on your Linux system:
+
+```bash
+# Nmap
+sudo apt install nmap -y
+
+# SQLMap
+git clone --depth 1 https://github.com/sqlmapproject/sqlmap.git
+sudo ln -s $(pwd)/sqlmap/sqlmap.py /usr/local/bin/sqlmap
+
+# OWASP ZAP (via zap-cli)
+sudo snap install zaproxy --classic
+pip install zap-cli
+
+---
 
 ## 🔶 Installation Guide (on fresh Linux VM)
 
