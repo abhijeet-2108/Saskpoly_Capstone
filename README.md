@@ -1,5 +1,5 @@
-# 🛡️ Pentesting Dashboard (Flask + MySQL)
-test
+# 🛡️ Pentesting Dashboard (Flask + SQLAlchemy)
+
 A lightweight, self-hosted Python Flask web app that provides a dashboard to run common penetration testing tools like **Nmap**, **SQLMap**, and **OWASP ZAP**, and view scan results in a web browser.
 
 ---
@@ -7,7 +7,7 @@ A lightweight, self-hosted Python Flask web app that provides a dashboard to run
 ## 🚀 Features
 
 - Run scans from browser (Nmap, SQLMap, ZAP)
-- Store scan output in MySQL
+- Store scan output in MySQL using SQLAlchemy ORM
 - View scan history with details
 - Simple frontend (HTML, CSS, JS)
 - No React or external APIs
@@ -19,15 +19,15 @@ A lightweight, self-hosted Python Flask web app that provides a dashboard to run
 
 - **Python 3**
 - **Flask** (Backend web server)
+- **SQLAlchemy** (Database ORM)
 - **MySQL** (Database)
 - **HTML + CSS + JS** (Frontend)
 - **OWASP ZAP, Nmap, SQLMap** (Pentesting tools)
 - **Flask-WTF** for forms
-- **Flask-MySQLdb** for MySQL integration
 
 ---
 
-## 🛆 Installation Guide (on fresh Linux VM)
+## 🔶 Installation Guide (on fresh Linux VM)
 
 ### 1. Install base dependencies:
 
@@ -91,7 +91,7 @@ pentesting-dashboard/
 
 ## 📘 Full Project Summary & Planning
 
-This is a self-hosted **Python Flask web application** that provides a dashboard interface to run various **penetration testing tools** (like **Nmap, SQLMap, and OWASP ZAP**) on a given target IP or URL. It saves scan history in a **MySQL database**, and uses basic **HTML, CSS, and JavaScript** for the frontend — no frameworks like React or Vue.
+This is a self-hosted **Python Flask web application** that provides a dashboard interface to run various **penetration testing tools** (like **Nmap, SQLMap, and OWASP ZAP**) on a given target IP or URL. It saves scan history in a **MySQL database** using **SQLAlchemy**, and uses basic **HTML, CSS, and JavaScript** for the frontend — no frameworks like React or Vue.
 
 > Target Audience: Beginner-to-intermediate cybersecurity learners or testers who want a **local, browser-accessible pentesting environment**.
 
@@ -119,41 +119,41 @@ pentesting-dashboard/
 
 ```txt
 Flask
-Flask-MySQLdb
 Flask-WTF
+SQLAlchemy
 mysqlclient
 python-dotenv
 ```
 
 ---
 
-### 🗂️ Flask Routes
+### 📂 Flask Routes
 
 | Route | Method | Purpose |
 |-------|--------|---------|
 | `/` | GET | Landing page with scan form |
 | `/scan` | POST | Handles scan form submission and runs selected tool |
-| `/history` | GET | Shows scan history from MySQL |
+| `/history` | GET | Shows scan history from DB |
 | `/scan/<id>` | GET | Detailed result of a specific scan |
 | `/clear-history` | POST | Deletes old scan data (optional feature) |
 
 ---
 
-### 💃 Database Schema (MySQL)
+### 📊 Database Schema (via SQLAlchemy)
 
 #### Table: `scans`
 
 | Column | Type | Description |
 |--------|------|-------------|
-| `id` | INT (PK) | Auto increment |
-| `target` | VARCHAR(255) | Target IP or URL |
-| `tool_used` | VARCHAR(50) | Nmap, SQLMap, ZAP |
-| `scan_output` | TEXT | Raw scan output |
-| `timestamp` | DATETIME | When scan was run |
+| `id` | Integer (PK) | Auto increment |
+| `target` | String(255) | Target IP or URL |
+| `tool_used` | String(50) | Nmap, SQLMap, ZAP |
+| `scan_output` | Text | Raw scan output |
+| `timestamp` | DateTime | When scan was run |
 
 ---
 
-### 🧬 Tool Wrappers in Python (`pentesting/`)
+### 🧮 Tool Wrappers in Python (`pentesting/`)
 
 | Script | Tool | Command |
 |--------|------|---------|
@@ -163,12 +163,12 @@ python-dotenv
 
 ---
 
-### 💽 Module Responsibilities
+### 📀 Module Responsibilities
 
 - `app.py`: Main Flask setup, blueprint registration.
 - `run.py`: Starts the app.
 - `config.py`: DB & app configs (from `.env`).
-- `models/`: DB connection and models.
+- `models/`: SQLAlchemy DB models.
 - `routes/`: Route logic for dashboard & scans.
 - `templates/`: HTML views for user interaction.
 - `static/`: CSS, JS, and images.
@@ -180,7 +180,7 @@ python-dotenv
 1. User visits `/` and inputs target + tool.
 2. Flask handles the form via `/scan` POST.
 3. The selected tool is run via `subprocess`.
-4. Output is parsed and stored in MySQL.
+4. Output is parsed and stored using SQLAlchemy.
 5. `/history` shows scan results to user.
 
 ---
