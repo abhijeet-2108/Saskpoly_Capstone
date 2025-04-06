@@ -1,5 +1,7 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
-from models.scan import db, Scan
+# routes/main_routes.py
+from flask import Blueprint, render_template, request, redirect, url_for
+from models.scan import Scan
+from app import db
 from pentesting.nmap_scan import run_nmap_scan
 from pentesting.sqlmap_scan import run_sqlmap_scan
 from pentesting.zap_scan import run_zap_scan
@@ -15,36 +17,21 @@ def scan():
     target = request.form.get('target')
     tool = request.form.get('tool')
 
-    # Validate if target and tool are provided
     if not target or not tool:
-        flash("Missing target or tool selection", "error")
-        return redirect(url_for('main_routes.index'))
+        return "Missing target or tool", 400
 
-    # Run selected scan
-    output = ""
-    try:
-        if tool == 'nmap':
-            output = run_nmap_scan(target)
-        elif tool == 'sqlmap':
-            output = run_sqlmap_scan(target)
-        elif tool == 'zap':
-            output = run_zap_scan(target)
-        else:
-            flash("Unsupported tool selected", "error")
-            return redirect(url_for('main_routes.index'))
-    except Exception as e:
-        flash(f"Error running the scan: {str(e)}", "error")
-        return redirect(url_for('main_routes.index'))
+    if tool == 'nmap':
+        output = run_nmap_scan(target)
+    elif tool == 'sqlmap':
+        output = run_sqlmap_scan(target)
+    elif tool == 'zap':
+        output = run_zap_scan(target)
+    else:
+        return "Unsupported tool", 400
 
-    # Save scan details to DB
-    try:
-        scan_record = Scan(target=target, tool_used=tool, scan_output=output)
-        db.session.add(scan_record)
-        db.session.commit()
-        flash("Scan completed successfully!", "success")
-    except Exception as e:
-        db.session.rollback()  # Rollback on error
-        flash(f"Error saving scan to database: {str(e)}", "error")
+    scan = Scan(target=target, tool_used=tool, scan_output=output)
+    db.session.add(scan)
+    db.session.commit()
 
     return redirect(url_for('main_routes.history'))
 
@@ -60,11 +47,6 @@ def scan_detail(scan_id):
 
 @main_routes.route('/clear-history', methods=['POST'])
 def clear_history():
-    try:
-        Scan.query.delete()
-        db.session.commit()
-        flash("Scan history cleared successfully.", "success")
-    except Exception as e:
-        db.session.rollback()
-        flash(f"Error clearing scan history: {str(e)}", "error")
+    Scan.query.delete()
+    db.session.commit()
     return redirect(url_for('main_routes.history'))
