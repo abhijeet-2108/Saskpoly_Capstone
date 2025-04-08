@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Pentesting Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>Run a New Scan</h2>
+  <form method="POST" action="/scan">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+      {{ form.target.label }}<br>
+      {{ form.target(size=50) }}
+    </div>
+    <div class="form-group">
+      {{ form.tool.label }}<br>
+      {{ form.tool() }}
+    </div>
+    <div class="form-group">
+      {{ form.submit() }}
+    </div>
+  </form>
+</div>
+{% endblock %}

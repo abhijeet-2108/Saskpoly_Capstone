@@ -1,5 +1,5 @@
 # app.py
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
 from dotenv import load_dotenv
@@ -21,5 +21,10 @@ def create_app():
     # Register blueprints
     from routes.main_routes import main_routes
     app.register_blueprint(main_routes)
+
+    # 404 handler (must be inside create_app to be app-aware)
+    @app.errorhandler(404)
+    def not_found(e):
+        return render_template("404.html"), 404
 
     return app

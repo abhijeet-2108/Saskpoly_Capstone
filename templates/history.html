@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Scan History{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>Scan History</h2>
+  {% if scans %}
+    <ul>
+      {% for scan in scans %}
+        <li>
+          <a href="{{ url_for('main_routes.scan_detail', id=scan.id) }}">
+            {{ scan.timestamp.strftime('%Y-%m-%d %H:%M:%S') }} - {{ scan.tool_used }} on {{ scan.target }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No scans found.</p>
+  {% endif %}
+</div>
+{% endblock %}

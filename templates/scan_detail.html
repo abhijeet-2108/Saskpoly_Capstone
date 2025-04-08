@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Scan Result{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>Scan Detail</h2>
+  <p><strong>Target:</strong> {{ scan.target }}</p>
+  <p><strong>Tool Used:</strong> {{ scan.tool_used }}</p>
+  <p><strong>Timestamp:</strong> {{ scan.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+
+  <h4>Scan Output:</h4>
+  <pre>{{ scan.scan_output }}</pre>
+
+  <a href="{{ url_for('main_routes.history') }}">← Back to History</a>
+</div>
+{% endblock %}
