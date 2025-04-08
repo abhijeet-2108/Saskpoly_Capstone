@@ -10,6 +10,7 @@ csrf = CSRFProtect()
 
 def create_app():
     load_dotenv()  # Load env vars from .env file
+    print(os.getenv('DATABASE_URL'))  # This will show the value loaded from .env file
 
     app = Flask(__name__)
     app.config.from_object('config.Config')
