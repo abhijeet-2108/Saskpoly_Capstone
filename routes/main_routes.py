@@ -1,5 +1,6 @@
 # routes/main_routes.py
 from flask import Blueprint, render_template, request, redirect, url_for
+from forms import ScanForm
 from models.scan import Scan
 from app import db
 from pentesting.nmap_scan import run_nmap_scan
@@ -8,9 +9,10 @@ from pentesting.zap_scan import run_zap_scan
 
 main_routes = Blueprint('main_routes', __name__)
 
-@main_routes.route('/')
+@main_routes.route('/', methods=["GET"])
 def index():
-    return render_template('index.html')
+    form = ScanForm()
+    return render_template('index.html',form=form)
 
 @main_routes.route('/scan', methods=['POST'])
 def scan():
