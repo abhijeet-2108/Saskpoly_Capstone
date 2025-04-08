@@ -20,7 +20,7 @@ def scan():
     tool = request.form.get('tool')
     print("FORM SUBMITTED")
     print("Target:", request.form.get('target'))
-    print("Scan Type:", request.form.get('scan_type'))
+    print("Scan Type:", request.form.get('tool'))
     if not target or not tool:
         return "Missing target or tool", 400
 
