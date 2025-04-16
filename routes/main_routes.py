@@ -12,20 +12,27 @@ main_routes = Blueprint('main_routes', __name__)
 @main_routes.route('/', methods=["GET"])
 def index():
     form = ScanForm()
-    return render_template('index.html',form=form)
+    return render_template('index.html', form=form)
 
 @main_routes.route('/scan', methods=['POST'])
 def scan():
-    target = request.form.get('target')
-    tool = request.form.get('tool')
+    form = ScanForm()
+
+    if not form.validate_on_submit():
+        return "Invalid form submission", 400
+
+    target = form.target.data
+    tool = form.tool.data
+
     print("FORM SUBMITTED")
-    print("Target:", request.form.get('target'))
-    print("Scan Type:", request.form.get('tool'))
-    if not target or not tool:
-        return "Missing target or tool", 400
+    print("Target:", target)
+    print("Scan Type:", tool)
+
+    output = ""
 
     if tool == 'nmap':
-        output = run_nmap_scan(target)
+        nmap_option = form.nmap_options.data or ''
+        output = run_nmap_scan(target, nmap_option)
     elif tool == 'sqlmap':
         output = run_sqlmap_scan(target)
     elif tool == 'zap':

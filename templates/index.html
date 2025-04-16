@@ -6,17 +6,43 @@
   <h2>Run a New Scan</h2>
   <form method="POST" action="/scan">
     {{ form.hidden_tag() }}
+    
     <div class="form-group">
       {{ form.target.label }}<br>
       {{ form.target(size=50) }}
     </div>
+
     <div class="form-group">
       {{ form.tool.label }}<br>
-      {{ form.tool() }}
+      {{ form.tool(id='tool-select') }}
     </div>
+
+    <!-- Nmap Options -->
+    <div class="form-group" id="nmap-options" style="display:none;">
+      <label>{{ form.nmap_options.label }}</label><br>
+      {% for value, label in form.nmap_options.choices %}
+        <label>
+          <input type="checkbox" name="{{ form.nmap_options.name }}" value="{{ value }}"
+                 {% if value in form.nmap_options.data %} checked {% endif %}>
+          {{ label }}
+        </label><br>
+      {% endfor %}
+    </div>
+
     <div class="form-group">
       {{ form.submit() }}
     </div>
   </form>
 </div>
+
+<script>
+  function toggleOptions() {
+    const tool = document.getElementById('tool-select').value;
+    const nmapOptions = document.getElementById('nmap-options');
+    nmapOptions.style.display = (tool === 'nmap') ? 'block' : 'none';
+  }
+
+  document.getElementById('tool-select').addEventListener('change', toggleOptions);
+  window.addEventListener('DOMContentLoaded', toggleOptions);
+</script>
 {% endblock %}
