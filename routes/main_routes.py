@@ -12,6 +12,7 @@ main_routes = Blueprint('main_routes', __name__)
 @main_routes.route('/', methods=["GET"])
 def index():
     form = ScanForm()
+    form.nmap_options.data = []
     return render_template('index.html', form=form)
 
 @main_routes.route('/scan', methods=['POST'])

@@ -23,7 +23,7 @@
       {% for value, label in form.nmap_options.choices %}
         <label>
           <input type="checkbox" name="{{ form.nmap_options.name }}" value="{{ value }}"
-                 {% if value in form.nmap_options.data %} checked {% endif %}>
+                 {% if value in form.nmap_options.data and value in form.nmap_options.data %} checked {% endif %}>
           {{ label }}
         </label><br>
       {% endfor %}
