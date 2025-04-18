@@ -16,5 +16,27 @@ class ScanForm(FlaskForm):
             ("-Pn", "Skip Host Discovery (-Pn)")
         ]
     )
+    # SQLmao optoins
+    sqlmap_options = SelectMultipleField(
+    "SQLMap Scan Options",
+        choices=[
+            ("--batch", "Non-interactive Mode (--batch)"),
+            ("--crawl=1", "Crawl Level (--crawl=1)"),
+            ("--level=3", "Level of Tests (--level=3)"),
+            ("--risk=2", "Risk Level (--risk=2)"),
+            ("--dump", "Dump DB Contents (--dump)")
+        ]
+    )
+    # ZAP options
+    zap_options = SelectMultipleField(
+    "ZAP Scan Options",
+        choices=[
+            ("-quick", "Quick Scan (-quick)"),
+            ("-full", "Full Scan (-full)"),
+            ("-ajax", "AJAX Spider (-ajax)"),
+            ("-passive", "Passive Scan Only (-passive)"),
+            ("-report", "Generate Report (-report)")
+        ]
+    )
 
     submit = SubmitField("Run Scan")

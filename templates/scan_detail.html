@@ -7,7 +7,9 @@
   <p><strong>Target:</strong> {{ scan.target }}</p>
   <p><strong>Tool Used:</strong> {{ scan.tool_used }}</p>
   <p><strong>Timestamp:</strong> {{ scan.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</p>
-
+  {% if scan.scan_options %}
+    <p><strong>Options Used:</strong> {{ scan.scan_options }}</p>
+  {% endif %}
   <h4>Scan Output:</h4>
   <pre>{{ scan.scan_output }}</pre>
 

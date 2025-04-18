@@ -34,10 +34,14 @@ def scan():
     if tool == 'nmap':
         nmap_option = form.nmap_options.data or ''
         output = run_nmap_scan(target, nmap_option)
-    elif tool == 'sqlmap':
-        output = run_sqlmap_scan(target)
+    # elif tool == 'sqlmap':
+    #     output = run_sqlmap_scan(target)
+    elif tool == "sqlmap":
+        selected_options = form.sqlmap_options.data
+        output = run_sqlmap_scan(target, selected_options)
     elif tool == 'zap':
-        output = run_zap_scan(target)
+        selected_options = form.zap_options.data
+        output = run_zap_scan(target, selected_options)
     else:
         return "Unsupported tool", 400
 
