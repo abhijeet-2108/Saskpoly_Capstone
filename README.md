@@ -6,31 +6,32 @@ A lightweight, self-hosted Python Flask web app that provides a dashboard to run
 
 ## 🚀 Features
 
-- Run scans from browser (Nmap, SQLMap, ZAP)
-- Store scan output in MySQL using SQLAlchemy ORM
-- View scan history with details
-- Simple frontend (HTML, CSS, JS)
+- Run scans via browser: Nmap, SQLMap, ZAP
+- Custom scan options for each tool
+- Store scan output in MySQL using SQLAlchemy
+- View detailed scan history
+- Dark/Light theme toggle
+- Clean, responsive frontend (HTML, CSS, Bootstrap)
 - No React or external APIs
-- Self-hosted, runs on any Linux VM
+- Fully self-hosted, ideal for VMs or labs
 
 ---
 
 ## 🧐 Technologies Used
 
 - **Python 3**
-- **Flask** (Backend web server)
-- **SQLAlchemy** (Database ORM)
-- **MySQL** (Database)
-- **HTML + CSS + JS** (Frontend)
-- **OWASP ZAP, Nmap, SQLMap** (Pentesting tools)
-- **Flask-WTF** for forms
+- **Flask** – Backend web server
+- **SQLAlchemy** – ORM to interact with MySQL
+- **MySQL** – Persistent scan storage
+- **HTML + CSS + Bootstrap** – Frontend
+- **OWASP ZAP, Nmap, SQLMap** – Core pentesting tools
+- **Flask-WTF** – Form handling
 
 ---
----
 
-## 🔧 Install Pentesting Tools
+## 🔧 Required Tools
 
-Make sure the following tools are installed on your Linux system:
+Make sure the following tools are installed on your system:
 
 ```bash
 # Nmap
@@ -40,101 +41,143 @@ sudo apt install nmap -y
 git clone --depth 1 https://github.com/sqlmapproject/sqlmap.git
 sudo ln -s $(pwd)/sqlmap/sqlmap.py /usr/local/bin/sqlmap
 
-# OWASP ZAP (via zap-cli)
+# OWASP ZAP (zap-cli wrapper)
 sudo snap install zaproxy --classic
 pip install zap-cli
+```
 
 ---
 
-## 🔶 Installation Guide (on fresh Linux VM)
+## 🔶 Installation Guide (on Fresh Linux VM)
 
-### 1. Install base dependencies:
+### 1. Install Base Dependencies:
 
 ```bash
 sudo apt update
 sudo apt install python3 python3-pip python3-venv mysql-server libmysqlclient-dev -y
 ```
 
-### 2. Create project folder & virtual environment:
+### 2. Create Project Environment:
 
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-### 3. Install Python packages:
+### 3. Install Python Packages:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Clone or copy project files:
+### 4. Clone the Project:
 
 ```bash
-# If you're cloning:
 git clone <your_repo_url>
 cd pentesting-dashboard
 ```
 
 ---
 
-## 🏃 How to Run the App
+## 🌛 How to Run the App
+
+The app runs on **port 80**. Use the following command to launch:
 
 ```bash
-source venv/bin/activate
-python run.py
+sudo env "PATH=$PATH" "PYTHONPATH=$PYTHONPATH" "VIRTUAL_ENV=$VIRTUAL_ENV" python run.py
 ```
 
 Then open your browser at:  
-`http://127.0.0.1:5000`
+👉 `http://127.0.0.1`
 
 ---
 
-## 📺 Project Structure
+## 📁 Project Structure
 
 ```
 pentesting-dashboard/
 ├── app.py
 ├── config.py
 ├── run.py
+├── forms.py                # Flask-WTF forms and option logic
 ├── requirements.txt
 ├── README.md
 ├── templates/
+│   ├── base.html
+│   ├── index.html
+│   └── history.html
 ├── static/
+│   └── css/
+│       └── style.css
 ├── pentesting/
+│   ├── nmap_scan.py
+│   ├── sqlmap_scan.py
+│   └── zap_scan.py
 ├── models/
+│   └── scan_model.py
 ├── routes/
+│   └── main_routes.py
 ```
 
 ---
 
-## 📘 Full Project Summary & Planning
+## 🌐 App Flow
 
-This is a self-hosted **Python Flask web application** that provides a dashboard interface to run various **penetration testing tools** (like **Nmap, SQLMap, and OWASP ZAP**) on a given target IP or URL. It saves scan history in a **MySQL database** using **SQLAlchemy**, and uses basic **HTML, CSS, and JavaScript** for the frontend — no frameworks like React or Vue.
-
-> Target Audience: Beginner-to-intermediate cybersecurity learners or testers who want a **local, browser-accessible pentesting environment**.
-
----
-
-### 🪚 Project File Structure
-
-```
-pentesting-dashboard/
-├── app.py
-├── config.py
-├── run.py
-├── requirements.txt
-├── README.md
-├── templates/
-├── static/
-├── pentesting/
-├── models/
-├── routes/
-```
+1. User lands on `/` and submits a scan form.
+2. Flask handles the scan via `/scan` POST route.
+3. The selected tool runs using `subprocess`.
+4. Output is stored in MySQL via SQLAlchemy.
+5. Scan history is accessible via `/history`.
 
 ---
 
-### ⚙️ Python Libraries Used
+## 🧒 Flask Routes Summary
+
+| Route           | Method | Description                          |
+|----------------|--------|--------------------------------------|
+| `/`            | GET    | Main form for launching a scan       |
+| `/scan`        | POST   | Handles scan logic and stores result |
+| `/history`     | GET    | Lists previous scans                 |
+| `/scan/<id>`   | GET    | Shows full output of a specific scan |
+| `/clear-history` | POST | Clears all scans (optional future)   |
+
+---
+
+## 🧰 Database (SQLAlchemy)
+
+### Table: `scans`
+
+| Column       | Type        | Description              |
+|--------------|-------------|--------------------------|
+| `id`         | Integer     | Primary key              |
+| `target`     | String(255) | Target URL or IP         |
+| `tool_used`  | String(50)  | nmap, sqlmap, zap        |
+| `scan_output`| Text        | Raw output of the tool   |
+| `timestamp`  | DateTime    | When scan was executed   |
+
+---
+
+## 🛠️ Tool Wrappers (`/pentesting/`)
+
+| File            | Tool     | Sample Command                          |
+|------------------|----------|------------------------------------------|
+| `nmap_scan.py`   | Nmap     | `nmap -sV <target>`                     |
+| `sqlmap_scan.py` | SQLMap   | `sqlmap -u <target> --batch --level=1` |
+| `zap_scan.py`    | OWASP ZAP| `zap -cmd -quickurl <target>`          |
+
+---
+
+## 🎨 UI/UX Highlights
+
+- Clean Bootstrap UI
+- Option checkboxes for each tool
+- All tool options toggle dynamically (JS)
+- Dark/Light mode with toggle (via localStorage)
+- Fully responsive and mobile friendly
+
+---
+
+## ⚙️ Python Dependencies
 
 ```txt
 Flask
@@ -146,75 +189,18 @@ python-dotenv
 
 ---
 
-### 📂 Flask Routes
+## 🔮 Possible Future Upgrades
 
-| Route | Method | Purpose |
-|-------|--------|---------|
-| `/` | GET | Landing page with scan form |
-| `/scan` | POST | Handles scan form submission and runs selected tool |
-| `/history` | GET | Shows scan history from DB |
-| `/scan/<id>` | GET | Detailed result of a specific scan |
-| `/clear-history` | POST | Deletes old scan data (optional feature) |
-
----
-
-### 📊 Database Schema (via SQLAlchemy)
-
-#### Table: `scans`
-
-| Column | Type | Description |
-|--------|------|-------------|
-| `id` | Integer (PK) | Auto increment |
-| `target` | String(255) | Target IP or URL |
-| `tool_used` | String(50) | Nmap, SQLMap, ZAP |
-| `scan_output` | Text | Raw scan output |
-| `timestamp` | DateTime | When scan was run |
+- Auth system (Flask-Login)
+- Scan export (PDF, CSV)
+- Scan scheduling
+- Task queuing via Celery
+- OSINT tool integrations
+- Charts or visual result rendering
 
 ---
 
-### 🧮 Tool Wrappers in Python (`pentesting/`)
+## ✍️ Author Notes
 
-| Script | Tool | Command |
-|--------|------|---------|
-| `nmap_scan.py` | Nmap | `nmap -sV <target>` |
-| `sqlmap_scan.py` | SQLMap | `sqlmap -u <target> --batch --level=1` |
-| `zap_scan.py` | OWASP ZAP | CLI or API scan call |
-
----
-
-### 📀 Module Responsibilities
-
-- `app.py`: Main Flask setup, blueprint registration.
-- `run.py`: Starts the app.
-- `config.py`: DB & app configs (from `.env`).
-- `models/`: SQLAlchemy DB models.
-- `routes/`: Route logic for dashboard & scans.
-- `templates/`: HTML views for user interaction.
-- `static/`: CSS, JS, and images.
-
----
-
-### 💻 Scan Workflow
-
-1. User visits `/` and inputs target + tool.
-2. Flask handles the form via `/scan` POST.
-3. The selected tool is run via `subprocess`.
-4. Output is parsed and stored using SQLAlchemy.
-5. `/history` shows scan results to user.
-
----
-
-### 📀 Optional Future Enhancements
-
-- Login authentication (Flask-Login)
-- Export scans as PDF
-- Email reports (SMTP)
-- Celery task queuing for long scans
-- Visual result rendering (e.g., Nmap port map)
-
----
-
-### 🧑‍💻 Author Notes
-
-This project is a practical penetration testing lab tool for small networks or web app targets. You can extend it with more tools or export features like PDF/Email alerts later.
+This app is built for ethical hacking students, red-team beginners, and pentest labs. It focuses on core tools, security learning, and practical results — no fluff.
 
