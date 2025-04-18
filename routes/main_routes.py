@@ -13,6 +13,8 @@ main_routes = Blueprint('main_routes', __name__)
 def index():
     form = ScanForm()
     form.nmap_options.data = []
+    form.sqlmap_options.data = []
+    form.zap_options.data = []
     return render_template('index.html', form=form)
 
 @main_routes.route('/scan', methods=['POST'])
