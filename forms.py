@@ -4,9 +4,8 @@ from wtforms.validators import DataRequired
 
 class ScanForm(FlaskForm):
     target = StringField("Target (IP or URL)", validators=[DataRequired()])
-    tool = SelectField("Tool", choices=[("nmap", "Nmap"), ("sqlmap", "SQLMap"), ("zap", "ZAP")])
+    tool = SelectField("Tool", choices=[("nmap", "Nmap"), ("sqlmap", "SQLMap"), ("zap", "ZAP"), ("theharvester", "theHarvester")])
 
-    # Nmap options - values are actual CLI flags, labels are user-friendly
     nmap_options = SelectMultipleField(
         "Nmap Scan Options",
         choices=[
@@ -16,9 +15,9 @@ class ScanForm(FlaskForm):
             ("-Pn", "Skip Host Discovery (-Pn)")
         ]
     )
-    # SQLmao optoins
+
     sqlmap_options = SelectMultipleField(
-    "SQLMap Scan Options",
+        "SQLMap Scan Options",
         choices=[
             ("--batch", "Non-interactive Mode (--batch)"),
             ("--crawl=1", "Crawl Level (--crawl=1)"),
@@ -27,9 +26,9 @@ class ScanForm(FlaskForm):
             ("--dump", "Dump DB Contents (--dump)")
         ]
     )
-    # ZAP options
+
     zap_options = SelectMultipleField(
-    "ZAP Scan Options",
+        "ZAP Scan Options",
         choices=[
             ("-quick", "Quick Scan (-quick)"),
             ("-full", "Full Scan (-full)"),
@@ -38,7 +37,7 @@ class ScanForm(FlaskForm):
             ("-report", "Generate Report (-report)")
         ]
     )
-    # harvester source option
+
     harvester_sources = SelectField(
         "Data Source",
         choices=[
@@ -47,8 +46,19 @@ class ScanForm(FlaskForm):
             ("crtsh", "crt.sh"),
             ("linkedin", "LinkedIn"),
             ("twitter", "Twitter"),
-        ],
-        validators=[DataRequired()]
+        ]
     )
 
     submit = SubmitField("Run Scan")
+
+    def validate(self, extra_validators=None):
+        """Dynamically validate based on the tool selected."""
+        initial_validation = super().validate(extra_validators)
+        if not initial_validation:
+            return False
+
+        if self.tool.data == "theharvester" and not self.harvester_sources.data:
+            self.harvester_sources.errors.append("Please select a data source for theHarvester.")
+            return False
+
+        return True

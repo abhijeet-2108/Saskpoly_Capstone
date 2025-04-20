@@ -34,6 +34,8 @@ def scan():
     form = ScanForm()
 
     if not form.validate_on_submit():
+        print("Form submission failed:")
+        print(form.errors)  # 👈 Debug form validation issues
         return "Invalid form submission", 400
 
     target = form.target.data
@@ -41,31 +43,24 @@ def scan():
 
     print("FORM SUBMITTED")
     print("Target:", target)
-    print("Scan Type:", tool)
+    print("Tool:", tool)
 
     output = ""
 
     if tool == 'nmap':
-        nmap_option = form.nmap_options.data or ''
-        output = run_nmap_scan(target, nmap_option)
-    # elif tool == 'sqlmap':
-    #     output = run_sqlmap_scan(target)
-    elif tool == "sqlmap":
-        selected_options = form.sqlmap_options.data
-        output = run_sqlmap_scan(target, selected_options)
+        output = run_nmap_scan(target, form.nmap_options.data or [])
+    elif tool == 'sqlmap':
+        output = run_sqlmap_scan(target, form.sqlmap_options.data or [])
     elif tool == 'zap':
-        selected_options = form.zap_options.data
-        output = run_zap_scan(target, selected_options)
-    elif tool == 'whois':  # ✅ New block
+        output = run_zap_scan(target, form.zap_options.data or [])
+    elif tool == 'theharvester':
+        output = run_theharvester_scan(target, form.harvester_sources.data)
+    elif tool == 'whois':
         output = run_whois_scan(target)
     elif tool == 'dig':
         output = run_dig_scan(target)
     elif tool == 'nslookup':
         output = run_nslookup_scan(target)
-    elif tool == 'theharvester':
-        source = form.harvester_sources.data
-        output = run_theharvester_scan(target, source)
-
     else:
         return "Unsupported tool", 400
 
@@ -74,6 +69,7 @@ def scan():
     db.session.commit()
 
     return redirect(url_for('main_routes.history'))
+
 
 @main_routes.route('/history')
 def history():
@@ -119,6 +115,6 @@ def stage1_theharvester():
     form = ScanForm()
     return render_template('stage1/theharvester.html', form=form)
 
-@main_routes.route('/stage1', methods=['GET'], endpoint='stage1')
+@main_routes.route('/stage1', methods=['GET'], endpoint='stage1_index')
 def stage1_index():
     return render_template('stage1/index.html')
