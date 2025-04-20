@@ -92,33 +92,33 @@ def clear_history():
     return redirect(url_for('main_routes.history'))
 
 
-@main_routes.route('/stage1/nmap', methods=['GET'])
+@main_routes.route('/stage1/nmap', methods=['GET'], endpoint='stage1_nmap')
 def nmap_scan_page():
     form = ScanForm()
     form.nmap_options.data = []
     # form.tool.data = 'nmap'  # Pre-set tool value for this form
     return render_template('stage1/nmap.html', form=form)
 
-@main_routes.route('/stage1/whois', methods=['GET', 'POST'])
+@main_routes.route('/stage1/whois', methods=['GET', 'POST'], endpoint='stage1_whois')
 def stage1_whois():
     form = ScanForm()
     return render_template('stage1/whois.html', form=form)
 
-@main_routes.route('/stage1/dig', methods=['GET', 'POST'])
+@main_routes.route('/stage1/dig', methods=['GET', 'POST'], endpoint='stage1_dig')
 def stage1_dig():
     form = ScanForm()
     return render_template('stage1/dig.html', form=form)
 
-@main_routes.route('/stage1/nslookup', methods=['GET', 'POST'])
+@main_routes.route('/stage1/nslookup', methods=['GET', 'POST'], endpoint='stage1_nslookup')
 def stage1_nslookup():
     form = ScanForm()
     return render_template('stage1/nslookup.html', form=form)
 
-@main_routes.route('/stage1/theharvester', methods=['GET', 'POST'])
+@main_routes.route('/stage1/theharvester', methods=['GET', 'POST'], endpoint='stage1_theharvester')
 def stage1_theharvester():
     form = ScanForm()
     return render_template('stage1/theharvester.html', form=form)
 
-@main_routes.route('/stage1', methods=['GET'])
+@main_routes.route('/stage1', methods=['GET'], endpoint='stage1')
 def stage1_index():
     return render_template('stage1/index.html')
