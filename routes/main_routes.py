@@ -115,6 +115,6 @@ def stage1_theharvester():
     form = ScanForm()
     return render_template('stage1/theharvester.html', form=form)
 
-@main_routes.route('/stage1', methods=['GET'], endpoint='stage1_index')
+@main_routes.route('/stage1', methods=['GET'], endpoint='stage1')
 def stage1_index():
     return render_template('stage1/index.html')
