@@ -8,7 +8,8 @@
     {{ form.hidden_tag() }}
 
     {# Set the tool field to "nmap" correctly #}
-    {{ form.tool(value='nmap', type="hidden") }}
+    <!-- {{ form.tool(value='nmap', type="hidden") }} -->
+    <input type="hidden" name="tool" value="nmap">
 
     <div class="form-group mb-3">
       {{ form.target.label(class="form-label") }}

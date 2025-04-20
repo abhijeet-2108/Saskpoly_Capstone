@@ -13,10 +13,10 @@
           <h5 class="card-title">1. Reconnaissance</h5>
           <p class="card-text">Gather initial information about the target system.</p>
           <ul class="list-unstyled">
-            <li><a href="#">🔍 Nmap</a></li>
-            <li><a href="#">📡 theHarvester</a></li>
-            <li><a href="#">🌐 Recon-ng</a></li>
-          </ul>
+            <li><a href="{{ url_for('main_routes.stage1_nmap') }}">🛰️ Nmap</a></li>
+            <li><a href="{{ url_for('main_routes.stage1_theharvester') }}">🕵️‍♂️ theHarvester</a></li>
+            <li><a href="{{ url_for('main_routes.stage1') }}">📦 More Recon Tools</a></li>
+          </ul>          
         </div>
       </div>
     </div>

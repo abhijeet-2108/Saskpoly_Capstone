@@ -96,7 +96,7 @@ def clear_history():
 def nmap_scan_page():
     form = ScanForm()
     form.nmap_options.data = []
-    form.tool.data = 'nmap'  # Pre-set tool value for this form
+    # form.tool.data = 'nmap'  # Pre-set tool value for this form
     return render_template('stage1/nmap.html', form=form)
 
 @main_routes.route('/stage1/whois', methods=['GET', 'POST'])
