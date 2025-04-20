@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Whois Scan - Stage 1{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4">Whois Lookup</h2>
+  <form method="POST" action="{{ url_for('main_routes.scan') }}">
+    {{ form.hidden_tag() }}
+    {{ form.tool(value='whois', type='hidden') }}
+
+    <div class="form-group mb-3">
+      {{ form.target.label(class="form-label") }}
+      {{ form.target(class="form-control", placeholder="e.g., example.com") }}
+    </div>
+
+    <div class="form-group mt-4">
+      {{ form.submit(class="btn btn-primary") }}
+    </div>
+  </form>
+</div>
+{% endblock %}

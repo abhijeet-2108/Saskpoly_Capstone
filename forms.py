@@ -38,5 +38,17 @@ class ScanForm(FlaskForm):
             ("-report", "Generate Report (-report)")
         ]
     )
+    # harvester source option
+    harvester_sources = SelectField(
+        "Data Source",
+        choices=[
+            ("google", "Google"),
+            ("bing", "Bing"),
+            ("crtsh", "crt.sh"),
+            ("linkedin", "LinkedIn"),
+            ("twitter", "Twitter"),
+        ],
+        validators=[DataRequired()]
+    )
 
     submit = SubmitField("Run Scan")

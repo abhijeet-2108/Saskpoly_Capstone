@@ -1,206 +1,184 @@
 # 🛡️ Pentesting Dashboard (Flask + SQLAlchemy)
 
-A lightweight, self-hosted Python Flask web app that provides a dashboard to run common penetration testing tools like **Nmap**, **SQLMap**, and **OWASP ZAP**, and view scan results in a web browser.
+A modular, self-hosted Flask-based dashboard to run and manage penetration testing tools in an organized, stage-based workflow. Designed for students, security labs, and red teamers.
 
 ---
 
-## 🚀 Features
+## 🌐 Overview
 
-- Run scans via browser: Nmap, SQLMap, ZAP
-- Custom scan options for each tool
-- Store scan output in MySQL using SQLAlchemy
-- View detailed scan history
-- Dark/Light theme toggle
-- Clean, responsive frontend (HTML, CSS, Bootstrap)
-- No React or external APIs
-- Fully self-hosted, ideal for VMs or labs
+The Pentesting Dashboard organizes tools and techniques into **five key stages of penetration testing**, helping users plan, execute, and analyze their assessments effectively:
+
+### 🔹 Pentesting Stages:
+
+1. **Reconnaissance**
+2. **Scanning & Enumeration**
+3. **Gaining Access**
+4. **Maintaining Access**
+5. **Reporting**
+
+Each stage will have a dedicated dashboard section with tools and custom configurations.
 
 ---
 
-## 🧐 Technologies Used
+## 🚀 Current Features
+
+- ✅ Run tools directly from the browser (currently: **Nmap**, **SQLMap**, **OWASP ZAP**)
+- ✅ View scan history with full output
+- ✅ Store all results in MySQL via SQLAlchemy
+- ✅ Dark/Light theme toggle
+- ✅ Fully self-hosted (ideal for VMs, labs)
+- ✅ Modular code structure for tool expansion
+
+---
+
+## 💠 Tools (Current & Future)
+
+| Stage                | Current Tools        | Possible Future Additions                        |
+|----------------------|----------------------|--------------------------------------------------|
+| **Reconnaissance**   | *(Coming Soon)*      | theHarvester, Shodan, Amass, Recon-ng            |
+| **Scanning**         | Nmap                 | Nikto, Dirb, Enum4linux, Masscan                 |
+| **Gaining Access**   | SQLMap               | Hydra, Metasploit, XSS-Strike                    |
+| **Maintaining Access** | *(Planned)*         | Netcat, Weevely, Reverse Shell Generators        |
+| **Reporting**        | *(Planned)*          | Dradis, PDF/Markdown Export, Reporting UI        |
+
+---
+
+## 🧹 Technologies Used
 
 - **Python 3**
-- **Flask** – Backend web server
-- **SQLAlchemy** – ORM to interact with MySQL
-- **MySQL** – Persistent scan storage
-- **HTML + CSS + Bootstrap** – Frontend
-- **OWASP ZAP, Nmap, SQLMap** – Core pentesting tools
-- **Flask-WTF** – Form handling
+- **Flask** – Web backend
+- **SQLAlchemy** – ORM for MySQL
+- **MySQL** – Database for persistent scan results
+- **HTML + CSS + Bootstrap** – UI Framework
+- **Flask-WTF** – Form Handling
+- **Tools**: Nmap, SQLMap, ZAP (cmd)
 
 ---
 
-## 🔧 Required Tools
-
-Make sure the following tools are installed on your system:
-
-```bash
-# Nmap
-sudo apt install nmap -y
-
-# SQLMap
-git clone --depth 1 https://github.com/sqlmapproject/sqlmap.git
-sudo ln -s $(pwd)/sqlmap/sqlmap.py /usr/local/bin/sqlmap
-
-# OWASP ZAP (zap-cli wrapper)
-sudo snap install zaproxy --classic
-pip install zap-cli
-```
-
----
-
-## 🔶 Installation Guide (on Fresh Linux VM)
-
-### 1. Install Base Dependencies:
-
-```bash
-sudo apt update
-sudo apt install python3 python3-pip python3-venv mysql-server libmysqlclient-dev -y
-```
-
-### 2. Create Project Environment:
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-### 3. Install Python Packages:
-
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Clone the Project:
-
-```bash
-git clone <your_repo_url>
-cd pentesting-dashboard
-```
-
----
-
-## 🌛 How to Run the App
-
-The app runs on **port 80**. Use the following command to launch:
-
-```bash
-sudo env "PATH=$PATH" "PYTHONPATH=$PYTHONPATH" "VIRTUAL_ENV=$VIRTUAL_ENV" python run.py
-```
-
-Then open your browser at:  
-👉 `http://127.0.0.1`
-
----
-
-## 📁 Project Structure
+## 📦 Project Structure
 
 ```
 pentesting-dashboard/
 ├── app.py
 ├── config.py
 ├── run.py
-├── forms.py                # Flask-WTF forms and option logic
-├── requirements.txt
-├── README.md
+├── forms.py                  # Flask-WTF logic
 ├── templates/
-│   ├── base.html
-│   ├── index.html
-│   └── history.html
+│   ├── base.html             # Common layout
+│   ├── index.html            # Home (5-stage dashboard)
+│   ├── history.html          # Scan history
+│   └── tools/                # Each tool gets its own view
+│       ├── nmap.html
+│       ├── sqlmap.html
+│       └── zap.html
 ├── static/
-│   └── css/
-│       └── style.css
+│   └── css/style.css
+├── routes/
+│   ├── main_routes.py
+│   └── tool_routes.py        # Separated per-stage/tool logic
+├── models/
+│   └── scan_model.py
 ├── pentesting/
 │   ├── nmap_scan.py
 │   ├── sqlmap_scan.py
 │   └── zap_scan.py
-├── models/
-│   └── scan_model.py
-├── routes/
-│   └── main_routes.py
+├── requirements.txt
+├── README.md
 ```
 
 ---
 
-## 🌐 App Flow
+## 📋 Routes (Current)
 
-1. User lands on `/` and submits a scan form.
-2. Flask handles the scan via `/scan` POST route.
-3. The selected tool runs using `subprocess`.
-4. Output is stored in MySQL via SQLAlchemy.
-5. Scan history is accessible via `/history`.
-
----
-
-## 🧒 Flask Routes Summary
-
-| Route           | Method | Description                          |
-|----------------|--------|--------------------------------------|
-| `/`            | GET    | Main form for launching a scan       |
-| `/scan`        | POST   | Handles scan logic and stores result |
-| `/history`     | GET    | Lists previous scans                 |
-| `/scan/<id>`   | GET    | Shows full output of a specific scan |
-| `/clear-history` | POST | Clears all scans (optional future)   |
+| Route               | Method | Description                                 |
+|--------------------|--------|---------------------------------------------|
+| `/`                | GET    | Homepage showing pentest stage cards        |
+| `/page1`           | GET    | Legacy form-based tool runner (to migrate)  |
+| `/scan`            | POST   | Handles scan logic and stores result        |
+| `/history`         | GET    | Shows all past scans                        |
+| `/scan/<id>`       | GET    | Shows detailed scan result                  |
+| `/clear-history`   | POST   | (Planned) Clears scan logs                  |
+| `/tools/nmap`      | GET    | Nmap tool UI                                |
+| `/tools/sqlmap`    | GET    | SQLMap tool UI                              |
+| `/tools/zap`       | GET    | OWASP ZAP tool UI                           |
 
 ---
 
-## 🧰 Database (SQLAlchemy)
+## ⚙️ Tool Integration Details
 
-### Table: `scans`
+### Nmap
+```bash
+nmap -sV <target>
+```
 
-| Column       | Type        | Description              |
-|--------------|-------------|--------------------------|
-| `id`         | Integer     | Primary key              |
-| `target`     | String(255) | Target URL or IP         |
-| `tool_used`  | String(50)  | nmap, sqlmap, zap        |
-| `scan_output`| Text        | Raw output of the tool   |
-| `timestamp`  | DateTime    | When scan was executed   |
+### SQLMap
+```bash
+sqlmap -u <target> --batch --level=1
+```
 
----
+### OWASP ZAP (zap-cli)
+```bash
+zap-cli quick-scan --self-contained <target>
+```
 
-## 🛠️ Tool Wrappers (`/pentesting/`)
-
-| File            | Tool     | Sample Command                          |
-|------------------|----------|------------------------------------------|
-| `nmap_scan.py`   | Nmap     | `nmap -sV <target>`                     |
-| `sqlmap_scan.py` | SQLMap   | `sqlmap -u <target> --batch --level=1` |
-| `zap_scan.py`    | OWASP ZAP| `zap -cmd -quickurl <target>`          |
+*Note: ZAP command execution integration is still under refinement.*
 
 ---
 
-## 🎨 UI/UX Highlights
+## 🔧 Installation Guide (Linux)
 
-- Clean Bootstrap UI
-- Option checkboxes for each tool
-- All tool options toggle dynamically (JS)
-- Dark/Light mode with toggle (via localStorage)
-- Fully responsive and mobile friendly
+### 1. Install Base Packages
+```bash
+sudo apt update
+sudo apt install python3 python3-pip python3-venv mysql-server libmysqlclient-dev -y
+```
 
----
-
-## ⚙️ Python Dependencies
-
-```txt
-Flask
-Flask-WTF
-SQLAlchemy
-mysqlclient
-python-dotenv
+### 2. Clone & Set Up Project
+```bash
+git clone <your_repo_url>
+cd pentesting-dashboard
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 ```
 
 ---
 
-## 🔮 Possible Future Upgrades
+## 💻 Run the App
 
-- Auth system (Flask-Login)
-- Scan export (PDF, CSV)
-- Scan scheduling
-- Task queuing via Celery
-- OSINT tool integrations
-- Charts or visual result rendering
+```bash
+sudo env "PATH=$PATH" "PYTHONPATH=$PYTHONPATH" "VIRTUAL_ENV=$VIRTUAL_ENV" python run.py
+```
+
+Visit: [http://127.0.0.1](http://127.0.0.1)
+
+---
+
+## 📚 Database Schema (`scans` table)
+
+| Field         | Type        | Description                      |
+|---------------|-------------|----------------------------------|
+| `id`          | Integer     | Primary key                      |
+| `target`      | String(255) | Target IP or URL                 |
+| `tool_used`   | String(50)  | Tool used (nmap, sqlmap, etc.)   |
+| `scan_options`| Text        | Command-line options used        |
+| `scan_output` | Text        | Raw terminal output              |
+| `timestamp`   | DateTime    | Time of execution                |
+
+---
+
+## 🌟 Future Roadmap
+
+- 🔒 Authentication (Flask-Login)
+- 📁 File upload support (for target lists)
+- 📊 Visualization (charts, ports, severity)
+- 📄 Export scan reports (Markdown → PDF)
+- ⏱️ Schedule scans (with Celery or cron)
+- 🧠 Add AI prompts for tool suggestions
 
 ---
 
 ## ✍️ Author Notes
 
-This app is built for ethical hacking students, red-team beginners, and pentest labs. It focuses on core tools, security learning, and practical results — no fluff.
+Built as a capstone project for ethical hacking learners and lab environments. Designed with flexibility, extensibility, and simplicity in mind — this dashboard encourages curiosity, experimentation, and real-world skills.
 

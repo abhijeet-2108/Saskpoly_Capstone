@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Nmap Scan - Stage 1{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4">Nmap Scan</h2>
+  <form method="POST" action="{{ url_for('main_routes.scan') }}">
+    {{ form.hidden_tag() }}
+
+    {# Set the tool field to "nmap" correctly #}
+    {{ form.tool(value='nmap', type="hidden") }}
+
+    <div class="form-group mb-3">
+      {{ form.target.label(class="form-label") }}
+      {{ form.target(class="form-control", placeholder="e.g., 192.168.1.1 or example.com") }}
+    </div>
+
+    <div class="form-group mb-3">
+      <label class="form-label">{{ form.nmap_options.label }}</label>
+      <div class="row">
+        {% for value, label in form.nmap_options.choices %}
+        <div class="col-md-6 mb-2">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="{{ form.nmap_options.name }}" value="{{ value }}"
+              {% if value in form.nmap_options.data %}checked{% endif %}>
+            <label class="form-check-label">{{ label }}</label>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="form-group mt-4">
+      {{ form.submit(class="btn btn-primary") }}
+    </div>
+  </form>
+</div>
+{% endblock %}

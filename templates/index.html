@@ -1,81 +1,85 @@
 {% extends "base.html" %}
-{% block title %}Pentesting Dashboard{% endblock %}
+{% block title %}Pentesting Dashboard - Home{% endblock %}
 
 {% block content %}
 <div class="container">
-  <h2>Run a New Scan</h2>
-  <form method="POST" action="/scan">
-    {{ form.hidden_tag() }}
+  <h2 class="mb-4 text-center">🛡️ Pentesting Stages</h2>
 
-    <div class="form-group">
-      {{ form.target.label }}<br>
-      {{ form.target(size=50) }}
-    </div>
-
-    <div class="form-group">
-      {{ form.tool.label }}<br>
-      {{ form.tool(id='tool-select') }}
-    </div>
-
-    <!-- Nmap Options -->
-    <div class="form-group" id="nmap-options" style="display: none;">
-      <label>{{ form.nmap_options.label }}</label><br>
-      {% for value, label in form.nmap_options.choices %}
-        <div style="display: flex; align-items: center; margin-bottom: 4px;">
-          <input type="checkbox" name="{{ form.nmap_options.name }}" value="{{ value }}"
-                 {% if value in form.nmap_options.data and value in form.nmap_options.data %} checked {% endif %}>
-          <span style="margin-left: 8px;">{{ label }}</span>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
+    <!-- Reconnaissance -->
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">1. Reconnaissance</h5>
+          <p class="card-text">Gather initial information about the target system.</p>
+          <ul class="list-unstyled">
+            <li><a href="#">🔍 Nmap</a></li>
+            <li><a href="#">📡 theHarvester</a></li>
+            <li><a href="#">🌐 Recon-ng</a></li>
+          </ul>
         </div>
-      {% endfor %}
+      </div>
     </div>
 
-    <!-- SQLMap Options -->
-    <div class="form-group" id="sqlmap-options" style="display: none;">
-      <label>{{ form.sqlmap_options.label }}</label><br>
-      {% for value, label in form.sqlmap_options.choices %}
-        <div style="display: flex; align-items: center; margin-bottom: 4px;">
-          <input type="checkbox" name="{{ form.sqlmap_options.name }}" value="{{ value }}"
-                 {% if value in form.sqlmap_options.data and value in form.sqlmap_options.data %} checked {% endif %}>
-          <span style="margin-left: 8px;">{{ label }}</span>
+    <!-- Scanning & Enumeration -->
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">2. Scanning & Enumeration</h5>
+          <p class="card-text">Discover open ports, services, and potential vulnerabilities.</p>
+          <ul class="list-unstyled">
+            <li><a href="#">🔎 Nikto</a></li>
+            <li><a href="#">📁 Dirb</a></li>
+            <li><a href="#">🔧 Enum4linux</a></li>
+          </ul>
         </div>
-      {% endfor %}
+      </div>
     </div>
 
-    <!-- ZAP Options -->
-    <div class="form-group" id="zap-options" style="display: none;">
-      <label>{{ form.zap_options.label }}</label><br>
-      {% for value, label in form.zap_options.choices %}
-        <div style="display: flex; align-items: center; margin-bottom: 4px;">
-          <input type="checkbox" name="{{ form.zap_options.name }}" value="{{ value }}"
-                 {% if value in form.zap_options.data and value in form.zap_options.data %} checked {% endif %}>
-          <span style="margin-left: 8px;">{{ label }}</span>
+    <!-- Gaining Access -->
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">3. Gaining Access</h5>
+          <p class="card-text">Exploit vulnerabilities to gain access to the system.</p>
+          <ul class="list-unstyled">
+            <li><a href="#">💉 SQLMap</a></li>
+            <li><a href="#">🔐 Hydra</a></li>
+            <li><a href="#">🚪 Metasploit</a></li>
+          </ul>
         </div>
-      {% endfor %}
+      </div>
     </div>
 
-    <div class="form-group">
-      {{ form.submit() }}
+    <!-- Maintaining Access -->
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">4. Maintaining Access</h5>
+          <p class="card-text">Create persistent access for further exploitation.</p>
+          <ul class="list-unstyled">
+            <li><a href="#">🕳️ Netcat</a></li>
+            <li><a href="#">🧠 Weevely</a></li>
+            <li><a href="#">📌 SSH Backdoor</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-  </form>
+
+    <!-- Reporting -->
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">5. Reporting</h5>
+          <p class="card-text">Document findings and share results.</p>
+          <ul class="list-unstyled">
+            <li><a href="#">🗒️ Dradis</a></li>
+            <li><a href="#">📄 Markdown → PDF</a></li>
+            <li><a href="#">🧾 Report Generator</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const toolSelect = document.getElementById('tool-select');
-    const nmapOptions = document.getElementById('nmap-options');
-    const sqlmapOptions = document.getElementById('sqlmap-options');
-    const zapOptions = document.getElementById('zap-options');
-
-    function toggleOptions() {
-      const selectedTool = toolSelect.value;
-
-      nmapOptions.style.display = (selectedTool === 'nmap') ? 'block' : 'none';
-      sqlmapOptions.style.display = (selectedTool === 'sqlmap') ? 'block' : 'none';
-      zapOptions.style.display = (selectedTool === 'zap') ? 'block' : 'none';
-    }
-
-    toolSelect.addEventListener('change', toggleOptions);
-    toggleOptions(); // Run on initial load
-  });
-</script>
 {% endblock %}
