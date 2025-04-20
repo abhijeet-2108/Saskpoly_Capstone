@@ -4,7 +4,15 @@ from wtforms.validators import DataRequired
 
 class ScanForm(FlaskForm):
     target = StringField("Target (IP or URL)", validators=[DataRequired()])
-    tool = SelectField("Tool", choices=[("nmap", "Nmap"), ("sqlmap", "SQLMap"), ("zap", "ZAP"), ("theharvester", "theHarvester")])
+    tool = SelectField("Tool", choices=[
+        ("nmap", "Nmap"),
+        ("sqlmap", "SQLMap"),
+        ("zap", "ZAP"),
+        ("theharvester", "theHarvester"),
+        ("whois", "Whois"),
+        ("dig", "Dig"),
+        ("nslookup", "Nslookup")
+    ])
 
     nmap_options = SelectMultipleField(
         "Nmap Scan Options",

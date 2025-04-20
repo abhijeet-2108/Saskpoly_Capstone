@@ -6,8 +6,9 @@
   <h2 class="mb-4">Whois Lookup</h2>
   <form method="POST" action="{{ url_for('main_routes.scan') }}">
     {{ form.hidden_tag() }}
-    {{ form.tool(value='whois', type='hidden') }}
-
+    <!-- {{ form.tool(value='whois', type='hidden') }} -->
+    <input type="hidden" name="tool" value="whois">
+    
     <div class="form-group mb-3">
       {{ form.target.label(class="form-label") }}
       {{ form.target(class="form-control", placeholder="e.g., example.com") }}

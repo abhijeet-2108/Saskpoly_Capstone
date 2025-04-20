@@ -6,7 +6,8 @@
   <h2 class="mb-4">DIG Lookup</h2>
   <form method="POST" action="{{ url_for('main_routes.scan') }}">
     {{ form.hidden_tag() }}
-    {{ form.tool(value='dig', type='hidden') }}
+    <!-- {{ form.tool(value='dig', type='hidden') }} -->
+    <input type="hidden" name="tool" value="dig">
 
     <div class="form-group mb-3">
       {{ form.target.label(class="form-label") }}
