@@ -46,7 +46,8 @@ class ScanForm(FlaskForm):
             ("crtsh", "crt.sh"),
             ("linkedin", "LinkedIn"),
             ("twitter", "Twitter"),
-        ]
+        ],
+        validate_choice=False
     )
 
     submit = SubmitField("Run Scan")
