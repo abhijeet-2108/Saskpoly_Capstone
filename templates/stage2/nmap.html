@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Nmap - Stage 2{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4">Nmap (Stage 2)</h2>
+  <form method="POST" action="{{ url_for('main_routes.scan') }}">
+    {{ form.hidden_tag() }}
+
+    <!-- Force tool to be 'nmap' -->
+    <input type="hidden" name="tool" value="nmap">
+
+    <div class="form-group mb-3">
+      {{ form.target.label(class="form-label") }}
+      {{ form.target(class="form-control", placeholder="e.g., 192.168.1.1 or example.com") }}
+    </div>
+
+    <div class="form-group mb-3">
+      <label class="form-label">Stage 2 Scan Options</label>
+      <div class="row">
+        <!-- Custom options -->
+        <div class="col-md-6 mb-2">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="nmap_options" value="-p-">
+            <label class="form-check-label">Scan all ports (-p-)</label>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-2">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="nmap_options" value="-A">
+            <label class="form-check-label">Aggressive Scan (-A)</label>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-2">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="nmap_options" value="--script vuln">
+            <label class="form-check-label">Vuln Scripts (--script vuln)</label>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-2">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="nmap_options" value="-sU">
+            <label class="form-check-label">UDP Scan (-sU)</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mt-4">
+      {{ form.submit(class="btn btn-primary") }}
+    </div>
+  </form>
+</div>
+{% endblock %}

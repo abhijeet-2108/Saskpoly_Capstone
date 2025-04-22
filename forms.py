@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, SubmitField, SelectMultipleField
 from wtforms.validators import DataRequired
+from wtforms.widgets import ListWidget, CheckboxInput
 
 class ScanForm(FlaskForm):
     target = StringField("Target (IP or URL)", validators=[DataRequired()])
@@ -11,7 +12,9 @@ class ScanForm(FlaskForm):
         ("theharvester", "theHarvester"),
         ("whois", "Whois"),
         ("dig", "Dig"),
-        ("nslookup", "Nslookup")
+        ("nslookup", "Nslookup"),
+        ("nikto", "Nikto"),
+        ("hydra", "Hydra")
     ])
 
     nmap_options = SelectMultipleField(
@@ -25,14 +28,16 @@ class ScanForm(FlaskForm):
     )
 
     sqlmap_options = SelectMultipleField(
-        "SQLMap Scan Options",
+        "SQLMap Options",
         choices=[
-            ("--batch", "Non-interactive Mode (--batch)"),
-            ("--crawl=1", "Crawl Level (--crawl=1)"),
-            ("--level=3", "Level of Tests (--level=3)"),
-            ("--risk=2", "Risk Level (--risk=2)"),
-            ("--dump", "Dump DB Contents (--dump)")
-        ]
+            ("--batch", "Batch Mode (no prompts)"),
+            ("--risk=3", "Risk Level 3"),
+            ("--level=5", "Level 5"),
+            ("--random-agent", "Use Random User-Agent"),
+            ("--crawl=3", "Crawl depth 3")
+        ],
+        option_widget=CheckboxInput(),
+        widget=ListWidget(prefix_label=False)
     )
 
     zap_options = SelectMultipleField(
@@ -58,10 +63,32 @@ class ScanForm(FlaskForm):
         validate_choice=False
     )
 
+    nikto_options = SelectMultipleField(
+        "Nikto Scan Options",
+        choices=[
+            ("-Display V", "Verbose Output (-Display V)"),
+            ("-no404", "Ignore 404 responses (-no404)")
+        ]
+    )
+
+    hydra_options = SelectMultipleField(
+        "Hydra Options",
+        choices=[
+            ("-V", "Verbose Output (-V)"),
+            ("-f", "Exit after first found login (-f)"),
+            ("-t 4", "Parallel Tasks (-t 4)"),
+            ("-s 22", "Custom Port (-s 22)")
+        ],
+        option_widget=CheckboxInput(),
+        widget=ListWidget(prefix_label=False)
+    )
+
+    hydra_username = StringField("Username")
+    hydra_password = StringField("Password")
+
     submit = SubmitField("Run Scan")
 
     def validate(self, extra_validators=None):
-        """Dynamically validate based on the tool selected."""
         initial_validation = super().validate(extra_validators)
         if not initial_validation:
             return False

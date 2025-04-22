@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Stage 3 - Exploitation{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">💥 Stage 3: Exploitation</h2>
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+  <!-- SQLMap -->
+  <div class="col">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">🛠️ SQLMap</h5>
+        <p class="card-text">Automated SQL injection and database takeover tool.</p>
+        <a href="{{ url_for('main_routes.stage3_sqlmap') }}" class="btn btn-primary">Launch SQLMap</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Metasploit (Coming Soon) -->
+  <div class="col">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">🎯 Metasploit</h5>
+        <p class="card-text">Penetration testing framework for exploiting vulnerabilities.</p>
+        <button class="btn btn-secondary" disabled>Coming Soon</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ExploitDB Search (Coming Soon) -->
+  <div class="col">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">📚 ExploitDB Search</h5>
+        <p class="card-text">Search through public exploits and vulnerabilities.</p>
+        <button class="btn btn-secondary" disabled>Coming Soon</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Exploit Tool (Coming Soon) -->
+  <div class="col">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">🧪 Custom Exploit</h5>
+        <p class="card-text">Manually crafted or advanced scripted exploit execution.</p>
+        <button class="btn btn-secondary" disabled>Coming Soon</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

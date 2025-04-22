@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Stage 2: Scanning & Enumeration{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">🔎 Stage 2: Scanning & Enumeration</h2>
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+  <!-- Nmap -->
+  <div class="col">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">🛰️ Nmap</h5>
+        <p class="card-text">Advanced port scanning, OS and service detection.</p>
+        <a href="{{ url_for('main_routes.stage2_nmap') }}" class="btn btn-primary">Launch Nmap</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nikto -->
+  <div class="col">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">🛡️ Nikto</h5>
+        <p class="card-text">Web server vulnerability scanner.</p>
+        <a href="{{ url_for('main_routes.stage2_nikto') }}" class="btn btn-primary">Launch Nikto</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Coming Soon: Enum4Linux -->
+  <div class="col">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">🧾 enum4linux</h5>
+        <p class="card-text">SMB enumeration for Windows systems.</p>
+        <button class="btn btn-secondary" disabled>Coming Soon</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Coming Soon: Gobuster -->
+  <div class="col">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">🗂️ Gobuster</h5>
+        <p class="card-text">Directory and file brute-forcing tool.</p>
+        <button class="btn btn-secondary" disabled>Coming Soon</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

@@ -10,15 +10,12 @@ from pentesting.whois_scan import run_whois_scan
 from pentesting.dig_scan import run_dig_scan
 from pentesting.nslookup_scan import run_nslookup_scan
 from pentesting.theharvester_scan import run_theharvester_scan
+from pentesting.nikto_scan import run_nikto_scan
 
 main_routes = Blueprint('main_routes', __name__)
 
 @main_routes.route('/', methods=["GET"])
 def index():
-    form = ScanForm()
-    form.nmap_options.data = []
-    form.sqlmap_options.data = []
-    form.zap_options.data = []
     return render_template('index.html', form=form)
 
 @main_routes.route('/page1', methods=["GET"])
@@ -48,9 +45,13 @@ def scan():
     output = ""
 
     if tool == 'nmap':
-        output = run_nmap_scan(target, form.nmap_options.data or [])
+        options = request.form.getlist("nmap_options") or []
+        output = run_nmap_scan(target, options)
     elif tool == 'sqlmap':
-        output = run_sqlmap_scan(target, form.sqlmap_options.data or [])
+        # output = run_sqlmap_scan(target, form.sqlmap_options.data or [])
+        options = request.form.getlist("sqlmap_options") or []
+        print("SQLMap Options:", options)
+        output = run_sqlmap_scan(target, options)
     elif tool == 'zap':
         output = run_zap_scan(target, form.zap_options.data or [])
     elif tool == 'theharvester':
@@ -61,6 +62,15 @@ def scan():
         output = run_dig_scan(target)
     elif tool == 'nslookup':
         output = run_nslookup_scan(target)
+    elif tool == 'nikto':
+        options = request.form.getlist("nikto_options") or []
+        output = run_nikto_scan(target, options)
+    elif tool == 'hydra':
+        options = request.form.getlist("hydra_options") or []
+        username = request.form.get("hydra_username")
+        password = request.form.get("hydra_password")
+        output = run_hydra_scan(target, username, password, options)
+
     else:
         return "Unsupported tool", 400
 
@@ -118,3 +128,41 @@ def stage1_theharvester():
 @main_routes.route('/stage1', methods=['GET'], endpoint='stage1')
 def stage1_index():
     return render_template('stage1/index.html')
+
+@main_routes.route('/stage2/nmap', methods=['GET'], endpoint='stage2_nmap')
+def stage2_nmap():
+    form = ScanForm()
+    # form.nmap_options.data = []  # Optional, to clear pre-selected
+    return render_template('stage2/nmap.html', form=form)
+
+@main_routes.route('/stage2/nikto', methods=['GET'], endpoint='stage2_nikto')
+def stage2_nikto():
+    form = ScanForm()
+    return render_template('stage2/nikto.html', form=form)
+
+@main_routes.route('/stage2', methods=['GET'], endpoint='stage2')
+def stage2_index():
+    return render_template('stage2/index.html')
+
+@main_routes.route('/stage3/sqlmap', methods=['GET'], endpoint='stage3_sqlmap')
+def stage3_sqlmap():
+    form = ScanForm()
+    return render_template('stage3/sqlmap.html', form=form)
+
+@main_routes.route('/stage3/hydra', methods=['GET'], endpoint='stage3_hydra')
+def stage3_hydra():
+    form = ScanForm()
+    return render_template('stage3/hydra.html', form=form)
+
+@main_routes.route('/stage3', methods=['GET'], endpoint='stage3')
+def stage3_index():
+    return render_template('stage3/index.html')
+
+@main_routes.route('/stage4/netcat', methods=['GET', 'POST'], endpoint='stage4_netcat')
+def stage4_netcat():
+    form = ScanForm()
+    return render_template('stage4/netcat.html', form=form)
+
+@main_routes.route('/stage4', methods=['GET'], endpoint='stage4')
+def stage4_index():
+    return render_template('stage4/index.html')

@@ -182,3 +182,10 @@ Visit: [http://127.0.0.1](http://127.0.0.1)
 
 Built as a capstone project for ethical hacking learners and lab environments. Designed with flexibility, extensibility, and simplicity in mind — this dashboard encourages curiosity, experimentation, and real-world skills.
 
+
+<!-- Stage	Tools
+Stage 1	nmap, whois, dig, nslookup, theHarvester
+Stage 2	nmap -sV/-O, nikto
+Stage 3	sqlmap, hydra
+Stage 4	netcat, weevely
+Stage 5	markdown2pdf, weasyprint -->
