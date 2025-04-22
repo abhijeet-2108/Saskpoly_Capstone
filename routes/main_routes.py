@@ -155,6 +155,7 @@ def stage2_index():
 @main_routes.route('/stage3/sqlmap', methods=['GET'], endpoint='stage3_sqlmap')
 def stage3_sqlmap():
     form = ScanForm()
+    form.sqlmap_options.data = []
     return render_template('stage3/sqlmap.html', form=form)
 
 @main_routes.route('/stage3/hydra', methods=['GET'], endpoint='stage3_hydra')

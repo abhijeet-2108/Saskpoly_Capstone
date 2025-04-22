@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container mt-4">
   <h2 class="mb-4">Nikto Scan</h2>
-  <form method="POST" action="{{ url_for('main_routes.run_stage2_nikto') }}">
+  <form method="POST" action="{{ url_for('main_routes.scan') }}">
     {{ form.hidden_tag() }}
     
     <input type="hidden" name="tool" value="nikto">
