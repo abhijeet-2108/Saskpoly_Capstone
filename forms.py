@@ -92,7 +92,8 @@ class ScanForm(FlaskForm):
         choices=[
             ("reverse", "Reverse Shell"),
             ("bind", "Bind Shell")
-        ]
+        ],
+        validate_choice=False
     )
 
     netcat_port = StringField("Port")  # ✅ No validator here
