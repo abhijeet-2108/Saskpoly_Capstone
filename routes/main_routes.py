@@ -146,6 +146,7 @@ def stage2_nmap():
 @main_routes.route('/stage2/nikto', methods=['GET'], endpoint='stage2_nikto')
 def stage2_nikto():
     form = ScanForm()
+    form.nikto_options.data = []
     return render_template('stage2/nikto.html', form=form)
 
 @main_routes.route('/stage2', methods=['GET'], endpoint='stage2')
