@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Netcat Tool{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2 class="mb-4">🕳️ Netcat</h2>
+
+  <form method="POST" action="{{ url_for('main_routes.scan') }}">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+      {{ form.target.label(class="form-label") }}
+      {{ form.target(class="form-control") }}
+    </div>
+
+    {{ form.tool(value='netcat', type='hidden') }}
+
+    <div class="mb-3">
+      {{ form.netcat_mode.label(class="form-label") }}
+      {{ form.netcat_mode(class="form-select") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.netcat_port.label(class="form-label") }}
+      {{ form.netcat_port(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.netcat_listener_ip.label(class="form-label") }}
+      {{ form.netcat_listener_ip(class="form-control") }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Run Netcat</button>
+  </form>
+</div>
+{% endblock %}

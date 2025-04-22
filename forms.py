@@ -14,7 +14,8 @@ class ScanForm(FlaskForm):
         ("dig", "Dig"),
         ("nslookup", "Nslookup"),
         ("nikto", "Nikto"),
-        ("hydra", "Hydra")
+        ("hydra", "Hydra"),
+        ("netcat", "Netcat")
     ])
 
     nmap_options = SelectMultipleField(
@@ -86,6 +87,17 @@ class ScanForm(FlaskForm):
     hydra_username = StringField("Username")
     hydra_password = StringField("Password")
 
+    netcat_mode = SelectField(
+        "Connection Mode",
+        choices=[
+            ("reverse", "Reverse Shell"),
+            ("bind", "Bind Shell")
+        ]
+    )
+
+    netcat_port = StringField("Port")  # ✅ No validator here
+    netcat_listener_ip = StringField("Listener IP (for reverse shell)")
+
     submit = SubmitField("Run Scan")
 
     def validate(self, extra_validators=None):
@@ -93,8 +105,14 @@ class ScanForm(FlaskForm):
         if not initial_validation:
             return False
 
+        # Only validate theHarvester if it's the selected tool
         if self.tool.data == "theharvester" and not self.harvester_sources.data:
             self.harvester_sources.errors.append("Please select a data source for theHarvester.")
+            return False
+
+        # Validate Netcat fields if selected
+        if self.tool.data == "netcat" and not self.netcat_port.data:
+            self.netcat_port.errors.append("Please enter a port for Netcat.")
             return False
 
         return True

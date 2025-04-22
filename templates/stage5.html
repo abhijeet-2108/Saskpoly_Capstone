@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Generate Report (Stage 5){% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>Generate Report (Stage 5)</h2>
+
+  <form method="POST">
+    <p>Select scans to include in the report:</p>
+    {% for scan in scans %}
+      <div>
+        <label>
+          <input type="checkbox" name="scan_ids" value="{{ scan.id }}">
+          {{ scan.timestamp.strftime('%Y-%m-%d %H:%M:%S') }} - {{ scan.tool_used }} on {{ scan.target }}
+        </label>
+      </div>
+    {% endfor %}
+    <br>
+    <button type="submit" class="btn btn-primary">Generate PDF</button>
+  </form>
+</div>
+{% endblock %}

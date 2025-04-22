@@ -21,7 +21,9 @@ def create_app():
 
     # Register blueprints
     from routes.main_routes import main_routes
+    from routes.reporting_routes import reporting_routes 
     app.register_blueprint(main_routes)
+    app.register_blueprint(reporting_routes)
 
     # 404 handler (must be inside create_app to be app-aware)
     @app.errorhandler(404)

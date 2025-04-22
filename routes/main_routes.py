@@ -11,12 +11,14 @@ from pentesting.dig_scan import run_dig_scan
 from pentesting.nslookup_scan import run_nslookup_scan
 from pentesting.theharvester_scan import run_theharvester_scan
 from pentesting.nikto_scan import run_nikto_scan
+from pentesting.hydra_scan import run_hydra_scan
+from pentesting.netcat_scan import run_netcat
 
 main_routes = Blueprint('main_routes', __name__)
 
 @main_routes.route('/', methods=["GET"])
 def index():
-    return render_template('index.html', form=form)
+    return render_template('index.html')
 
 @main_routes.route('/page1', methods=["GET"])
 def page1():
@@ -70,7 +72,13 @@ def scan():
         username = request.form.get("hydra_username")
         password = request.form.get("hydra_password")
         output = run_hydra_scan(target, username, password, options)
+    elif tool == 'netcat':
+        mode = request.form.get("netcat_mode")
+        port = request.form.get("netcat_port")
+        listener_ip = request.form.get("netcat_listener_ip") if mode == "reverse" else None
 
+        output = run_netcat(target, port, mode, listener_ip)
+    
     else:
         return "Unsupported tool", 400
 
