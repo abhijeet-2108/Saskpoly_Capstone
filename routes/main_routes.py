@@ -5,6 +5,7 @@ from fpdf import FPDF
 from io import BytesIO
 import re
 from forms import ScanForm
+from forms import ReportForm
 from models.scan import Scan
 from app import db
 from pentesting.nmap_scan import run_nmap_scan
