@@ -6,11 +6,13 @@
   <h2>Generate Report (Stage 5)</h2>
 
   <form method="POST">
+    {{ csrf_token() }}
+
     <p>Select scans to include in the report:</p>
     {% for scan in scans %}
-      <div>
-        <label>
-          <input type="checkbox" name="scan_ids" value="{{ scan.id }}">
+      <div class="form-check d-flex align-items-center mb-2">
+        <input class="form-check-input me-2" type="checkbox" name="scan_ids" value="{{ scan.id }}" id="scan{{ scan.id }}">
+        <label class="form-check-label" for="scan{{ scan.id }}">
           {{ scan.timestamp.strftime('%Y-%m-%d %H:%M:%S') }} - {{ scan.tool_used }} on {{ scan.target }}
         </label>
       </div>
