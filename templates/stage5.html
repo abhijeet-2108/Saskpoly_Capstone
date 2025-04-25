@@ -6,19 +6,21 @@
   <h2>Generate Report (Stage 5)</h2>
 
   <form method="POST">
-    {{ csrf_token() }}
+    {{ form.hidden_tag() }}  {# ✅ this now renders the CSRF token properly #}
 
     <p>Select scans to include in the report:</p>
-    {% for scan in scans %}
+
+    {% for value, label in form.scan_ids.choices %}
       <div class="form-check d-flex align-items-center mb-2">
-        <input class="form-check-input me-2" type="checkbox" name="scan_ids" value="{{ scan.id }}" id="scan{{ scan.id }}">
-        <label class="form-check-label" for="scan{{ scan.id }}">
-          {{ scan.timestamp.strftime('%Y-%m-%d %H:%M:%S') }} - {{ scan.tool_used }} on {{ scan.target }}
+        <input class="form-check-input me-2" type="checkbox" name="scan_ids" value="{{ value }}" id="scan{{ value }}">
+        <label class="form-check-label" for="scan{{ value }}">
+          {{ label }}
         </label>
       </div>
     {% endfor %}
+
     <br>
-    <button type="submit" class="btn btn-primary">Generate PDF</button>
+    {{ form.submit(class="btn btn-primary") }}  {# ✅ submit button via form class #}
   </form>
 </div>
 {% endblock %}

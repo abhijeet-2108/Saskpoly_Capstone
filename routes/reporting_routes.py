@@ -3,15 +3,24 @@ from models.scan import Scan
 from fpdf import FPDF
 from io import BytesIO
 import re
+from report_form import ReportForm  # ✅ you got this right — fine if it's in same dir
 
 reporting_routes = Blueprint("reporting_routes", __name__)
 
 @reporting_routes.route('/stage5', methods=["GET", "POST"])
 def stage5():
     scans = Scan.query.order_by(Scan.timestamp.desc()).all()
+    form = ReportForm()
 
-    if request.method == "POST":
-        selected_ids = request.form.getlist("scan_ids")
+    # ✅ Populate the choices for SelectMultipleField dynamically
+    form.scan_ids.choices = [
+        (scan.id, f"{scan.timestamp.strftime('%Y-%m-%d %H:%M:%S')} - {scan.tool_used} on {scan.target}")
+        for scan in scans
+    ]
+
+    # ✅ Use form.validate_on_submit() instead of checking request.method manually
+    if form.validate_on_submit():
+        selected_ids = form.scan_ids.data  # ✅ direct from form field
         selected_scans = Scan.query.filter(Scan.id.in_(selected_ids)).all()
 
         pdf = FPDF()
@@ -53,8 +62,8 @@ def stage5():
 
         return send_file(pdf_output, as_attachment=True, download_name="scan_report.pdf", mimetype="application/pdf")
 
-    return render_template("stage5.html", scans=scans)
-
+    # ✅ Always pass the form to template context
+    return render_template("stage5.html", form=form)
 
 def detect_findings(scan_output):
     findings = []
