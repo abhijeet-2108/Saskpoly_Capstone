@@ -1,5 +1,10 @@
 # routes/main_routes.py
 from flask import Blueprint, render_template, request, redirect, url_for
+from flask import request, send_file
+from report_form import ReportForm
+from fpdf import FPDF
+from io import BytesIO
+import re
 from forms import ScanForm
 from models.scan import Scan
 from app import db
@@ -13,6 +18,7 @@ from pentesting.theharvester_scan import run_theharvester_scan
 from pentesting.nikto_scan import run_nikto_scan
 from pentesting.hydra_scan import run_hydra_scan
 from pentesting.netcat_scan import run_netcat
+from pentesting.report_pdf import generate_pdf_report
 
 main_routes = Blueprint('main_routes', __name__)
 
@@ -176,3 +182,23 @@ def stage4_netcat():
 @main_routes.route('/stage4', methods=['GET'], endpoint='stage4')
 def stage4_index():
     return render_template('stage4/index.html')
+
+@main_routes.route('/stage5', methods=["GET", "POST"])
+def stage5():
+    scans = Scan.query.order_by(Scan.timestamp.desc()).all()
+    form = ReportForm()
+
+    form.scan_ids.choices = [
+        (scan.id, f"{scan.timestamp.strftime('%Y-%m-%d %H:%M:%S')} - {scan.tool_used} on {scan.target}")
+        for scan in scans
+    ]
+
+    if form.validate_on_submit():
+        selected_ids = form.scan_ids.data
+        selected_scans = Scan.query.filter(Scan.id.in_(selected_ids)).all()
+
+        pdf_output = generate_pdf_report(selected_scans)
+
+        return send_file(pdf_output, as_attachment=True, download_name="scan_report.pdf", mimetype="application/pdf")
+
+    return render_template("stage5.html", form=form)

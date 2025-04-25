@@ -3,6 +3,10 @@ from wtforms import StringField, SelectField, SubmitField, SelectMultipleField
 from wtforms.validators import DataRequired
 from wtforms.widgets import ListWidget, CheckboxInput
 
+class ReportForm(FlaskForm):
+    scan_ids = SelectMultipleField("Select scans", coerce=int, validators=[DataRequired()])
+    submit = SubmitField("Generate PDF")
+    
 class ScanForm(FlaskForm):
     target = StringField("Target (IP or URL)", validators=[DataRequired()])
     tool = SelectField("Tool", choices=[
