@@ -22,7 +22,7 @@ Each stage will have a dedicated dashboard section with tools and custom configu
 
 ## 🚀 Current Features
 
-- ✅ Run tools directly from the browser (currently: **Nmap**, **SQLMap**, **OWASP ZAP**)
+- ✅ Run tools directly from the browser  (currently: **Nmap**, **SQLMap**, **WHOSIS Lookup**, **theHarvester**,**and many more**)
 - ✅ View scan history with full output
 - ✅ Store all results in MySQL via SQLAlchemy
 - ✅ Dark/Light theme toggle
@@ -35,11 +35,11 @@ Each stage will have a dedicated dashboard section with tools and custom configu
 
 | Stage                | Current Tools        | Possible Future Additions                        |
 |----------------------|----------------------|--------------------------------------------------|
-| **Reconnaissance**   | *(Coming Soon)*      | theHarvester, Shodan, Amass, Recon-ng            |
-| **Scanning**         | Nmap                 | Nikto, Dirb, Enum4linux, Masscan                 |
-| **Gaining Access**   | SQLMap               | Hydra, Metasploit, XSS-Strike                    |
+| **Reconnaissance**   | nmap , Whois Lookup, Dig, NSLookup, theHarvester      | shodan, Amaas, Recon-ng           |
+| **Scanning**         | Nmap, nikto                  | Dirb, Enum4linux, Masscan                 |
+| **Gaining Access**   | SQLMap,Hydra               | Metasploit, XSS-Strike                    |
 | **Maintaining Access** | *(Planned)*         | Netcat, Weevely, Reverse Shell Generators        |
-| **Reporting**        | *(Planned)*          | Dradis, PDF/Markdown Export, Reporting UI        |
+| **Reporting**        | inbuilt reporting system          | *Dradis, PDF/Markdown Export, Reporting UI*        |
 
 ---
 
@@ -51,7 +51,7 @@ Each stage will have a dedicated dashboard section with tools and custom configu
 - **MySQL** – Database for persistent scan results
 - **HTML + CSS + Bootstrap** – UI Framework
 - **Flask-WTF** – Form Handling
-- **Tools**: Nmap, SQLMap, ZAP (cmd)
+- **Tools**: Nmap, SQLMap, whoislookup, dig, nslookup, theHarvester, nikto, hydra
 
 ---
 
@@ -67,21 +67,27 @@ pentesting-dashboard/
 │   ├── base.html             # Common layout
 │   ├── index.html            # Home (5-stage dashboard)
 │   ├── history.html          # Scan history
-│   └── tools/                # Each tool gets its own view
+│   └── stages/                # Each tool gets its own view
 │       ├── nmap.html
 │       ├── sqlmap.html
-│       └── zap.html
+│       ├── whois.html
+│       ├── dig.html
+│       ├── nikto.html
+│       └── theHarvester.html
 ├── static/
 │   └── css/style.css
 ├── routes/
-│   ├── main_routes.py
-│   └── tool_routes.py        # Separated per-stage/tool logic
+│   └── main_routes.py
 ├── models/
 │   └── scan_model.py
 ├── pentesting/
 │   ├── nmap_scan.py
 │   ├── sqlmap_scan.py
-│   └── zap_scan.py
+│   ├── dig_scan.py
+│   ├── hydra_scan.py
+│   ├── nikto_scan.py
+│   ├── whois_scan.py
+│   └── theharvester_scan.py
 ├── requirements.txt
 ├── README.md
 ```
@@ -98,9 +104,9 @@ pentesting-dashboard/
 | `/history`         | GET    | Shows all past scans                        |
 | `/scan/<id>`       | GET    | Shows detailed scan result                  |
 | `/clear-history`   | POST   | (Planned) Clears scan logs                  |
-| `/tools/nmap`      | GET    | Nmap tool UI                                |
-| `/tools/sqlmap`    | GET    | SQLMap tool UI                              |
-| `/tools/zap`       | GET    | OWASP ZAP tool UI                           |
+| `/stage1/nmap`      | GET    | Nmap tool UI                                |
+| `/stage3/sqlmap`    | GET    | SQLMap tool UI                              |
+
 
 ---
 
