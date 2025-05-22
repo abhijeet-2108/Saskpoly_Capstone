@@ -16,7 +16,7 @@
           <ul class="list-unstyled">
             <li><a href="{{ url_for('main_routes.stage1_nmap') }}">🛰️ Nmap</a></li>
             <li><a href="{{ url_for('main_routes.stage1_whois') }}">🌐 Whois Lookup</a></li>
-            <li><a href="{{ url_for('main_routes.stage1_theharvester') }}">🕵️ theHarvester</a></li>
+            <!-- <li><a href="{{ url_for('main_routes.stage1_theharvester') }}">🕵️ theHarvester</a></li> -->
             <li><a href="{{ url_for('main_routes.stage1') }}">📦 More Recon Tools</a></li>
           </ul>
         </div>
@@ -31,8 +31,8 @@
           <p class="card-text">Find open ports and discover vulnerable services.</p>
           <ul class="list-unstyled">
             <li><a href="{{ url_for('main_routes.stage2_nmap') }}">🔎 Nmap</a></li>
-            <li><a href="{{ url_for('main_routes.stage2_nikto') }}">🌐 Nikto</a></li>
-            <li><a href="{{ url_for('main_routes.stage2') }}">📁 More Scanning Tools</a></li>
+            <!-- <li><a href="{{ url_for('main_routes.stage2_nikto') }}">🌐 Nikto</a></li> -->
+            <li><a href="{{ url_for('main_routes.stage1') }}">📁 More Scanning Tools</a></li>
           </ul>
         </div>
       </div>
@@ -45,9 +45,9 @@
           <h5 class="card-title">3. Gaining Access</h5>
           <p class="card-text">Exploit vulnerabilities to gain access to the system.</p>
           <ul class="list-unstyled">
-            <li><a href="{{ url_for('main_routes.stage3_sqlmap') }}">💉 SQLMap</a></li>
+            <li><a href="{{ url_for('main_routes.stage3_sqlmap') }}" class="disabled">💉 SQLMap</a></li>
             <!-- <li><a href="" class="text-muted disabled">🔐 Hydra (Coming Soon)</a></li> -->
-            <li><a href="{{ url_for('main_routes.stage3_hydra') }}">🔐 Hydra</a></li>
+            <li><a href="{{ url_for('main_routes.stage3_hydra') }}" class="disabled">🔐 Hydra</a></li>
             <li><a href="#" class="text-muted disabled">🚪 Metasploit (Coming Soon)</a></li>
           </ul>
         </div>
@@ -76,8 +76,8 @@
           <h5 class="card-title">5. Reporting</h5>
           <p class="card-text">Compile your findings and generate structured reports.</p>
           <ul class="list-unstyled">
-            <li><a href="#" class="text-muted disabled">🗒️ Dradis (Coming Soon)</a></li>
-            <li><a href="#" class="text-muted disabled">📄 Markdown → PDF (Coming Soon)</a></li>
+            <!-- <li><a href="#" class="text-muted disabled">🗒️ Dradis (Coming Soon)</a></li>
+            <li><a href="#" class="text-muted disabled">📄 Markdown → PDF (Coming Soon)</a></li> -->
             <li><a href="#" class="text-muted disabled">🧾 Report Generator (Coming Soon)</a></li>
           </ul>
         </div>
