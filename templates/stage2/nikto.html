@@ -3,6 +3,13 @@
 {% block title %}Nikto Scan - Stage 2{% endblock %}
 
 {% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/stage2">Stage 2</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Nikto</li>
+  </ol>
+</nav>
 <div class="container mt-4">
   <h2 class="mb-4">Nikto Scan</h2>
   <form method="POST" action="{{ url_for('main_routes.scan') }}">

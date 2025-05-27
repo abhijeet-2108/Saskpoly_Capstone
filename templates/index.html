@@ -2,6 +2,12 @@
 {% block title %}Pentesting Dashboard - Home{% endblock %}
 
 {% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Home</li>
+  </ol>
+</nav>
+
 <div class="container">
   <h2 class="mb-4 text-center">🛡️ Pentesting Stages</h2>
 
@@ -16,7 +22,7 @@
           <ul class="list-unstyled">
             <li><a href="{{ url_for('main_routes.stage1_nmap') }}">🛰️ Nmap</a></li>
             <li><a href="{{ url_for('main_routes.stage1_whois') }}">🌐 Whois Lookup</a></li>
-            <!-- <li><a href="{{ url_for('main_routes.stage1_theharvester') }}">🕵️ theHarvester</a></li> -->
+            <li><a href="{{ url_for('main_routes.stage1_theharvester') }}">🕵️ theHarvester</a></li>
             <li><a href="{{ url_for('main_routes.stage1') }}">📦 More Recon Tools</a></li>
           </ul>
         </div>
@@ -31,8 +37,8 @@
           <p class="card-text">Find open ports and discover vulnerable services.</p>
           <ul class="list-unstyled">
             <li><a href="{{ url_for('main_routes.stage2_nmap') }}">🔎 Nmap</a></li>
-            <!-- <li><a href="{{ url_for('main_routes.stage2_nikto') }}">🌐 Nikto</a></li> -->
-            <li><a href="{{ url_for('main_routes.stage1') }}">📁 More Scanning Tools</a></li>
+            <li><a href="{{ url_for('main_routes.stage2_nikto') }}">🌐 Nikto</a></li>
+            <li><a href="{{ url_for('main_routes.stage2') }}">📁 More Scanning Tools</a></li>
           </ul>
         </div>
       </div>
@@ -47,7 +53,7 @@
           <ul class="list-unstyled">
             <li><a href="{{ url_for('main_routes.stage3_sqlmap') }}" class="disabled">💉 SQLMap</a></li>
             <!-- <li><a href="" class="text-muted disabled">🔐 Hydra (Coming Soon)</a></li> -->
-            <li><a href="{{ url_for('main_routes.stage3_hydra') }}" class="disabled">🔐 Hydra</a></li>
+            <li><a href="{{ url_for('main_routes.stage3_hydra') }}" class="">🔐 Hydra</a></li>
             <li><a href="#" class="text-muted disabled">🚪 Metasploit (Coming Soon)</a></li>
           </ul>
         </div>

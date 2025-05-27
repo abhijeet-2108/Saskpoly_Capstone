@@ -2,6 +2,12 @@
 {% block title %}Stage 2: Scanning & Enumeration{% endblock %}
 
 {% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Stage 2</li>
+  </ol>
+</nav>
 <h2 class="mb-4">🔎 Stage 2: Scanning & Enumeration</h2>
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
@@ -22,7 +28,7 @@
       <div class="card-body">
         <h5 class="card-title">🛡️ Nikto</h5>
         <p class="card-text">Web server vulnerability scanner.</p>
-        <a href="{{ url_for('main_routes.stage2_nikto') }}" class="btn btn-primary disabled">Launch Nikto</a>
+        <a href="{{ url_for('main_routes.stage2_nikto') }}" class="btn btn-primary ">Launch Nikto</a>
       </div>
     </div>
   </div>

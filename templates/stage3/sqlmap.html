@@ -2,6 +2,13 @@
 {% block title %}SQLMap Scan - Stage 3{% endblock %}
 
 {% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/stage3">Stage 3</a></li>
+    <li class="breadcrumb-item active" aria-current="page">SQLMap</li>
+  </ol>
+</nav>
 <div class="container">
   <h2>SQLMap Scan</h2>
   <form method="POST" action="{{ url_for('main_routes.scan') }}">

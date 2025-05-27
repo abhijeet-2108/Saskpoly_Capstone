@@ -201,5 +201,5 @@ def stage5():
 
         return send_file(pdf_output, as_attachment=True, download_name="scan_report.pdf", mimetype="application/pdf")
 
-    # return render_template("stage5.html", form=form)
-    return render_template("404.html", form=form)
+    return render_template("stage5.html", form=form)
+    # return render_template("404.html", form=form)
