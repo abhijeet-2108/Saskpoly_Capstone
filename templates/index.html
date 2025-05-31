@@ -17,14 +17,9 @@
     <div class="col">
       <div class="card h-100 shadow-sm">
         <div class="card-body">
-          <h5 class="card-title">1. Reconnaissance</h5>
+          <h5 class="card-title">Reconnaissance</h5>
           <p class="card-text">Gather information about the target using OSINT tools.</p>
-          <ul class="list-unstyled">
-            <li><a href="{{ url_for('main_routes.stage1_nmap') }}">🛰️ Nmap</a></li>
-            <li><a href="{{ url_for('main_routes.stage1_whois') }}">🌐 Whois Lookup</a></li>
-            <li><a href="{{ url_for('main_routes.stage1_theharvester') }}">🕵️ theHarvester</a></li>
-            <li><a href="{{ url_for('main_routes.stage1') }}">📦 More Recon Tools</a></li>
-          </ul>
+          <a href="/stage1" class="btn btn-primary">Run Reconnaissance Tools</a>
         </div>
       </div>
     </div>
@@ -33,35 +28,37 @@
     <div class="col">
       <div class="card h-100 shadow-sm">
         <div class="card-body">
-          <h5 class="card-title">2. Scanning & Enumeration</h5>
+          <h5 class="card-title">Scanning & Enumeration</h5>
           <p class="card-text">Find open ports and discover vulnerable services.</p>
-          <ul class="list-unstyled">
+            <a href="/stage2" class="btn btn-primary">Run Scanning Tools</a>
+
+          <!-- <ul class="list-unstyled">
             <li><a href="{{ url_for('main_routes.stage2_nmap') }}">🔎 Nmap</a></li>
             <li><a href="{{ url_for('main_routes.stage2_nikto') }}">🌐 Nikto</a></li>
             <li><a href="{{ url_for('main_routes.stage2') }}">📁 More Scanning Tools</a></li>
-          </ul>
+          </ul> -->
         </div>
       </div>
     </div>
 
     <!-- Stage 3: Gaining Access -->
-    <div class="col">
+    <!-- <div class="col">
       <div class="card h-100 shadow-sm">
         <div class="card-body">
           <h5 class="card-title">3. Gaining Access</h5>
           <p class="card-text">Exploit vulnerabilities to gain access to the system.</p>
           <ul class="list-unstyled">
             <li><a href="{{ url_for('main_routes.stage3_sqlmap') }}" class="disabled">💉 SQLMap</a></li>
-            <!-- <li><a href="" class="text-muted disabled">🔐 Hydra (Coming Soon)</a></li> -->
+             <li><a href="" class="text-muted disabled">🔐 Hydra (Coming Soon)</a></li> 
             <li><a href="{{ url_for('main_routes.stage3_hydra') }}" class="">🔐 Hydra</a></li>
             <li><a href="#" class="text-muted disabled">🚪 Metasploit (Coming Soon)</a></li>
           </ul>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Stage 4: Maintaining Access -->
-    <div class="col">
+    <!-- <div class="col">
       <div class="card h-100 shadow-sm">
         <div class="card-body">
           <h5 class="card-title">4. Maintaining Access</h5>
@@ -73,19 +70,17 @@
           </ul>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Stage 5: Reporting -->
     <div class="col">
       <div class="card h-100 shadow-sm">
         <div class="card-body">
-          <h5 class="card-title">5. Reporting</h5>
+          <h5 class="card-title">Generate Reports</h5>
           <p class="card-text">Compile your findings and generate structured reports.</p>
-          <ul class="list-unstyled">
             <!-- <li><a href="#" class="text-muted disabled">🗒️ Dradis (Coming Soon)</a></li>
             <li><a href="#" class="text-muted disabled">📄 Markdown → PDF (Coming Soon)</a></li> -->
-            <li><a href="#" class="text-muted disabled">🧾 Report Generator (Coming Soon)</a></li>
-          </ul>
+            <a href="/stage5" class="btn btn-primary ">Report Generator</a>
         </div>
       </div>
     </div>

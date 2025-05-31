@@ -62,39 +62,40 @@
 
                 <!-- Stage 1 Dropdown -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" href="/stage1" role="button" data-bs-toggle="dropdown">1️⃣ Recon</a>
+                    <a class="nav-link dropdown-toggle text-white" href="/stage1" role="button" data-bs-toggle="dropdown">🔍 Reconnaissance</a>
                     <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><a class="dropdown-item" href="/stage1/option1">Subdomains</a></li>
-                        <li><a class="dropdown-item" href="/stage1/option2">Port Scan</a></li>
-                        <li><a class="dropdown-item" href="/stage1/option3">Services</a></li>
-                        <li><a class="dropdown-item" href="/stage1/option4">Vuln Scan</a></li>
+                        <li><a class="dropdown-item" href="/stage1/nmap">Nmap</a></li>
+                        <li><a class="dropdown-item" href="/stage1/whois">Whois</a></li>
+                        <li><a class="dropdown-item" href="/stage1/dig">Dig</a></li>
+                        <li><a class="dropdown-item" href="/stage1/nslookup">NSLookup</a></li>
+                        <li><a class="dropdown-item" href="/stage1/theharvester">TheHarvester</a></li>
                     </ul>
                 </li>
 
                 <!-- Stage 2 Dropdown -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" href="/stage2" role="button" data-bs-toggle="dropdown">2️⃣ Scan</a>
+                    <a class="nav-link dropdown-toggle text-white" href="/stage2" role="button" data-bs-toggle="dropdown">🔎 Scanning & Enumeration</a>
                     <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><a class="dropdown-item" href="/stage2/option1">Nmap</a></li>
+                        <li><a class="dropdown-item" href="/stage2/nmap">Nmap</a></li>
                         <li><a class="dropdown-item" href="/stage2/option2">Masscan</a></li>
-                        <li><a class="dropdown-item" href="/stage2/option3">Nikto</a></li>
+                        <li><a class="dropdown-item" href="/stage2/nikto">Nikto</a></li>
                         <li><a class="dropdown-item" href="/stage2/option4">Dirbuster</a></li>
                     </ul>
                 </li>
 
                 <!-- Stage 3 Dropdown -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" href="/stage3" role="button" data-bs-toggle="dropdown">3️⃣ Access</a>
+                <!-- <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="/stage3" role="button" data-bs-toggle="dropdown">3️⃣ Access & Persist</a>
                     <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><a class="dropdown-item" href="/stage3/option1">Brute Force</a></li>
-                        <li><a class="dropdown-item" href="/stage3/option2">SQLi</a></li>
-                        <li><a class="dropdown-item" href="/stage3/option3">File Upload</a></li>
-                        <li><a class="dropdown-item" href="/stage3/option4">RCE</a></li>
+                        <li><a class="dropdown-item" href="/stage3/sqlmap">SQLMap</a></li>
+                        <li><a class="dropdown-item" href="/stage3/hydra">Hydra</a></li>
+                        <li><a class="dropdown-item" href="/stage3/option3">Netcat</a></li>
+                         <li><a class="dropdown-item" href="/stage3/option4">RCE</a></li> 
                     </ul>
-                </li>
+                </li> -->
 
                 <!-- Stage 4 Dropdown -->
-                <li class="nav-item dropdown">
+                <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="/stage4" role="button" data-bs-toggle="dropdown">4️⃣ Persist</a>
                     <ul class="dropdown-menu dropdown-menu-dark">
                         <li><a class="dropdown-item" href="/stage4/option1">Backdoor</a></li>
@@ -102,10 +103,10 @@
                         <li><a class="dropdown-item" href="/stage4/option3">Privilege Escalation</a></li>
                         <li><a class="dropdown-item" href="/stage4/option4">Token Theft</a></li>
                     </ul>
-                </li>
+                </li> -->
 
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/stage5">5️⃣ Report</a>
+                    <a class="nav-link text-white" href="/stage5">🖨 Generate Report</a>
                 </li>
 
                 <li class="nav-item mt-3 ps-3">
@@ -119,7 +120,7 @@
     </div>
 
     <!-- Content Area -->
-    <div class="content" style="margin-left: 10px;">
+    <div class="content mx-5" style="margin-left: 10px;">
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for msg in messages %}
