@@ -13,7 +13,6 @@
   <h2 class="mb-4">Whois Lookup</h2>
   <form method="POST" action="{{ url_for('main_routes.scan') }}">
     {{ form.hidden_tag() }}
-    <!-- {{ form.tool(value='whois', type='hidden') }} -->
     <input type="hidden" name="tool" value="whois">
     
     <div class="form-group mb-3">
@@ -25,5 +24,20 @@
       {{ form.submit(class="btn btn-primary") }}
     </div>
   </form>
+
+  <!-- Educational Content Section -->
+  <div class="alert alert-info mt-4">
+    <h5 class="alert-heading">💡 About Whois</h5>
+    <p>
+      Whois is a protocol used to retrieve information about domain name registrations, such as ownership, registrar, and expiration details.
+      It's essential for verifying domain legitimacy and for cybersecurity investigations.
+    </p>
+    <p>
+      Whois data can help identify potential phishing domains or ensure that a domain is properly registered to the right entity.
+    </p>
+    <p class="mb-0">
+      Be mindful when using Whois data for ethical and responsible purposes.
+    </p>
+  </div>
 </div>
 {% endblock %}

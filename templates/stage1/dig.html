@@ -13,7 +13,6 @@
   <h2 class="mb-4">DIG Lookup</h2>
   <form method="POST" action="{{ url_for('main_routes.scan') }}">
     {{ form.hidden_tag() }}
-    <!-- {{ form.tool(value='dig', type='hidden') }} -->
     <input type="hidden" name="tool" value="dig">
 
     <div class="form-group mb-3">
@@ -25,5 +24,20 @@
       {{ form.submit(class="btn btn-primary") }}
     </div>
   </form>
+
+  <!-- Educational Content Section -->
+  <div class="alert alert-info mt-4">
+    <h5 class="alert-heading">💡 About DIG</h5>
+    <p>
+      DIG (Domain Information Groper) is a powerful tool for querying DNS name servers and troubleshooting DNS issues.
+      It provides detailed responses about DNS records and can help verify configurations.
+    </p>
+    <p>
+      Commonly used for verifying MX, A, AAAA, and other DNS records, DIG is invaluable for network diagnostics and security professionals.
+    </p>
+    <p class="mb-0">
+      Always ensure you have permission before probing or querying domains.
+    </p>
+  </div>
 </div>
 {% endblock %}
