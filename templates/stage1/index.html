@@ -8,84 +8,79 @@
     <li class="breadcrumb-item active" aria-current="page">Reconnaissance</li>
   </ol>
 </nav>
+
 <h2 class="mb-4">🔍 Reconnaissance</h2>
+
+<p class="lead mb-4">
+  Begin your reconnaissance phase with these essential tools. Each helps you gather valuable information to strengthen your security testing.
+</p>
+
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
   <!-- Nmap -->
   <div class="col">
-    <div class="card h-100 shadow-sm">
-      <div class="card-body">
+    <div class="card h-100 shadow-sm d-flex flex-column">
+      <div class="card-body d-flex flex-column">
         <h5 class="card-title">🛰️ Nmap</h5>
-        <p class="card-text">
-          Network scanning and port enumeration.<br>
-          Nmap is a versatile tool that helps in discovering hosts and services on a computer network. 
-          It’s commonly used for security auditing and network inventory, providing detailed information about the network topology and potential vulnerabilities.
+        <p class="card-text text-muted small flex-grow-1">
+          Discover hosts and services with this powerful network scanner.
         </p>
-        <a href="{{ url_for('main_routes.stage1_nmap') }}" class="btn btn-primary">Launch Nmap</a>
+        <a href="{{ url_for('main_routes.stage1_nmap') }}" class="btn btn-primary mt-2">Launch Nmap</a>
       </div>
     </div>
   </div>
 
   <!-- Whois -->
   <div class="col">
-    <div class="card h-100 shadow-sm">
-      <div class="card-body">
+    <div class="card h-100 shadow-sm d-flex flex-column">
+      <div class="card-body d-flex flex-column">
         <h5 class="card-title">🌐 Whois</h5>
-        <p class="card-text">
-          Fetch domain registration and ownership info.<br>
-          Whois is a helpful tool for investigating domain names and IP addresses, providing contact and registration details. 
-          It’s essential for cybersecurity investigations, domain management, and verifying domain legitimacy.
+        <p class="card-text text-muted small flex-grow-1">
+          Retrieve domain registration and ownership details quickly.
         </p>
-        <a href="{{ url_for('main_routes.stage1_whois') }}" class="btn btn-primary">Launch Whois</a>
+        <a href="{{ url_for('main_routes.stage1_whois') }}" class="btn btn-primary mt-2">Launch Whois</a>
       </div>
     </div>
   </div>
 
   <!-- DIG -->
   <div class="col">
-    <div class="card h-100 shadow-sm">
-      <div class="card-body">
+    <div class="card h-100 shadow-sm d-flex flex-column">
+      <div class="card-body d-flex flex-column">
         <h5 class="card-title">📡 DIG</h5>
-        <p class="card-text">
-          DNS lookup and diagnostics utility.<br>
-          DIG (Domain Information Groper) is widely used for DNS troubleshooting, providing detailed information about DNS records. 
-          It’s a must-have for network administrators and security professionals to ensure DNS configurations are correct and secure.
+        <p class="card-text text-muted small flex-grow-1">
+          Perform DNS lookups and analyze records with ease.
         </p>
-        <a href="{{ url_for('main_routes.stage1_dig') }}" class="btn btn-primary">Launch DIG</a>
+        <a href="{{ url_for('main_routes.stage1_dig') }}" class="btn btn-primary mt-2">Launch DIG</a>
       </div>
     </div>
   </div>
 
   <!-- NSLookup -->
   <div class="col">
-    <div class="card h-100 shadow-sm">
-      <div class="card-body">
+    <div class="card h-100 shadow-sm d-flex flex-column">
+      <div class="card-body d-flex flex-column">
         <h5 class="card-title">🧭 NSLookup</h5>
-        <p class="card-text">
-          Query DNS records and server information.<br>
-          NSLookup is a command-line tool used to query DNS servers and obtain domain-related information. 
-          It’s crucial for diagnosing DNS issues, verifying records, and analyzing the resolution process.
+        <p class="card-text text-muted small flex-grow-1">
+          Query DNS servers and verify domain information.
         </p>
-        <a href="{{ url_for('main_routes.stage1_nslookup') }}" class="btn btn-primary">Launch NSLookup</a>
+        <a href="{{ url_for('main_routes.stage1_nslookup') }}" class="btn btn-primary mt-2">Launch NSLookup</a>
       </div>
     </div>
   </div>
 
   <!-- TheHarvester -->
   <div class="col">
-    <div class="card h-100 shadow-sm">
-      <div class="card-body">
+    <div class="card h-100 shadow-sm d-flex flex-column">
+      <div class="card-body d-flex flex-column">
         <h5 class="card-title">🕵️‍♂️ TheHarvester</h5>
-        <p class="card-text">
-          Email, subdomain and open source intel gathering.<br>
-          TheHarvester is an OSINT (Open Source Intelligence) tool that collects data from public sources like search engines and social networks. 
-          It’s valuable for ethical hacking, red teaming, and mapping an organization’s exposure on the internet.
+        <p class="card-text text-muted small flex-grow-1">
+          Gather emails, subdomains, and open-source intelligence data.
         </p>
-        <a href="{{ url_for('main_routes.stage1_theharvester') }}" class="btn btn-primary">Launch TheHarvester</a>
+        <a href="{{ url_for('main_routes.stage1_theharvester') }}" class="btn btn-primary mt-2">Launch TheHarvester</a>
       </div>
     </div>
   </div>
 
 </div>
-
 {% endblock %}
