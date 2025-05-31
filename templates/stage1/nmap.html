@@ -5,17 +5,17 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Home</a></li>
-    <li class="breadcrumb-item"><a href="/stage1">Stage 1</a></li>
+    <li class="breadcrumb-item"><a href="/stage1">Reconnaissance</a></li>
     <li class="breadcrumb-item active" aria-current="page">Nmap</li>
   </ol>
 </nav>
+
 <div class="container mt-4">
   <h2 class="mb-4">Nmap Scan</h2>
   <form method="POST" action="{{ url_for('main_routes.scan') }}">
     {{ form.hidden_tag() }}
 
-    {# Set the tool field to "nmap" correctly #}
-    <!-- {{ form.tool(value='nmap', type="hidden") }} -->
+    <!-- Set the tool field to "nmap" correctly -->
     <input type="hidden" name="tool" value="nmap">
 
     <div class="form-group mb-3">
@@ -42,5 +42,21 @@
       {{ form.submit(class="btn btn-primary") }}
     </div>
   </form>
+
+  <!-- Educational Content Section -->
+  <div class="alert alert-info mt-4">
+    <h5 class="alert-heading">💡 About Nmap</h5>
+    <p>
+      Nmap (Network Mapper) is an open-source tool used for network exploration and security auditing. 
+      It’s designed to rapidly scan large networks, but it also works well against single hosts.
+    </p>
+    <p>
+      With Nmap, you can discover hosts, detect services, identify operating systems, and even find potential vulnerabilities. 
+      It’s a foundational tool for ethical hacking and network management.
+    </p>
+    <p class="mb-0">
+      Use Nmap responsibly and always ensure you have permission before scanning any network.
+    </p>
+  </div>
 </div>
 {% endblock %}
