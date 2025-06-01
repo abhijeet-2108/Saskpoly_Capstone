@@ -15,18 +15,29 @@
   <p><strong>Scan Date:</strong> {{ scan.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</p>
 
   <h4 class="mt-4">Nmap Findings</h4>
-  <p><strong>IP:</strong> {{ findings.nmap.ip or 'N/A' }}</p>
-  <p><strong>OS:</strong> {{ findings.nmap.os or 'N/A' }}</p>
+    {% if findings.nmap.ip and findings.nmap.ip != 'Not found' %}
+        <p><strong>IP:</strong> {{ findings.nmap.ip }}</p>
+        {% else %}
+        <p><strong>IP:</strong> Not found</p>
+    {% endif %}
+
+  {% if findings.nmap.os and findings.nmap.os != 'Not found' %}
+    <p><strong>OS:</strong> {{ findings.nmap.os }}</p>
+    {% else %}
+    <p><strong>OS:</strong> Not found</p>
+    {% endif %}
+
   <h5>Open Ports</h5>
-  {% if findings.nmap.ports %}
+    {% if findings.nmap.ports %}
     <ul>
-      {% for port in findings.nmap.ports %}
+        {% for port in findings.nmap.ports %}
         <li>{{ port.port }} - {{ port.service }} ({{ port.version }})</li>
-      {% endfor %}
+        {% endfor %}
     </ul>
-  {% else %}
+    {% else %}
     <p>No open ports found.</p>
-  {% endif %}
+    {% endif %}
+
 
   <h4 class="mt-4">Whois Information</h4>
   <ul>
