@@ -93,6 +93,7 @@ def scan():
     db.session.commit()
 
     return redirect(url_for('main_routes.history'))
+
 @main_routes.route("/fastscan", methods=["GET", "POST"])
 def fast_scan():
     form = ScanForm()
@@ -117,8 +118,8 @@ def fast_scan():
         db.session.add(scan)
         db.session.commit()
 
-        # ✅ Show results directly on the page
-        return render_template("fastscan.html", form=form, result=combined_output)
+        # ✅ Redirect to the history page
+        return redirect(url_for('main_routes.history'))
 
     # ✅ GET request: render form without results
     return render_template("fastscan.html", form=form, result=None)
