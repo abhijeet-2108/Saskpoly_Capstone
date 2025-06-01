@@ -29,7 +29,8 @@ class ScanForm(FlaskForm):
             ("-O", "OS Detection (-O)"),
             ("-sV", "Version Detection (-sV)"),
             ("-Pn", "Skip Host Discovery (-Pn)")
-        ]
+        ],
+        validate_choice=False
     )
 
     sqlmap_options = SelectMultipleField(
