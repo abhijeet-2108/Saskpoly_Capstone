@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Fast Scan Tool{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Fast Scan</li>
+  </ol>
+</nav>
+
+<div class="container mt-4">
+  <h2 class="mb-4">⚡ Fast Scan Tool</h2>
+  <form method="POST" action="{{ url_for('main_routes.fast_scan') }}">
+    {{ form.hidden_tag() }}
+
+    <div class="form-group mb-3">
+      {{ form.target.label(class="form-label") }}
+      {{ form.target(class="form-control", placeholder="e.g., 192.168.1.1 or example.com") }}
+    </div>
+
+    <div class="form-group mt-3">
+      <button type="submit" class="btn btn-success">Run Fast Scan</button>
+    </div>
+  </form>
+
+  {% if result %}
+    <div class="alert alert-info mt-4">
+      <h5>Scan Result:</h5>
+      <p>{{ result }}</p>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -9,20 +9,14 @@
 </nav>
 
 <div class="container">
-  <!-- Fast Scan Tool -->
+<!-- Fast Scan Tool -->
 <div class="row mb-4 justify-content-center">
   <div class="col-12 col-md-8">
     <div class="card shadow-sm">
       <div class="card-body">
         <h5 class="card-title">⚡ Fast Scan Tool</h5>
         <p class="card-text">Quickly perform basic scans (Nmap & Whois) for a target IP or URL.</p>
-        <form method="POST" action="{{ url_for('main_routes.fast_scan') }}">
-          <div class="mb-3">
-            <label for="fastscan-target" class="form-label">Target (IP or URL)</label>
-            <input type="text" class="form-control" id="fastscan-target" name="target" placeholder="e.g., 192.168.1.1 or example.com" required>
-          </div>
-          <button type="submit" class="btn btn-success">Run Fast Scan</button>
-        </form>
+        <a href="{{ url_for('main_routes.fast_scan') }}" class="btn btn-success">Open Fast Scan Tool</a>
       </div>
     </div>
   </div>

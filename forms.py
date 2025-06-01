@@ -19,7 +19,8 @@ class ScanForm(FlaskForm):
         ("nslookup", "Nslookup"),
         ("nikto", "Nikto"),
         ("hydra", "Hydra"),
-        ("netcat", "Netcat")
+        ("netcat", "Netcat"),
+        ("fastscan", "Fast Scan")
     ])
 
     nmap_options = SelectMultipleField(
