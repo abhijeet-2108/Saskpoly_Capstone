@@ -9,8 +9,9 @@
     <li class="breadcrumb-item active" aria-current="page">Nmap</li>
   </ol>
 </nav>
+
 <div class="container mt-4">
-  <h2 class="mb-4">Nmap (Stage 2)</h2>
+  <h2 class="mb-4">Nmap Scan </h2>
   <form method="POST" action="{{ url_for('main_routes.scan') }}">
     {{ form.hidden_tag() }}
 
@@ -60,5 +61,19 @@
       {{ form.submit(class="btn btn-primary") }}
     </div>
   </form>
+
+  <!-- Educational Content Section -->
+  <div class="alert alert-info mt-4">
+    <h5 class="alert-heading">💡 About Nmap in Stage 2</h5>
+    <p>
+      In Stage 2, Nmap is used for **more advanced scanning techniques**. Beyond simple host discovery, you can perform full port scans, aggressive OS and service detection, and even leverage vulnerability scripts to identify known security issues.
+    </p>
+    <p>
+      These advanced scans provide a clearer picture of potential weaknesses and help map out network infrastructure in greater detail.
+    </p>
+    <p class="mb-0">
+      <strong>Reminder:</strong> Always scan responsibly and ensure you have authorization to test the target network.
+    </p>
+  </div>
 </div>
 {% endblock %}

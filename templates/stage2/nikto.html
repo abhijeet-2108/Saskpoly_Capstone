@@ -1,4 +1,3 @@
-<!-- templates/stage2/nikto.html -->
 {% extends "base.html" %}
 {% block title %}Nikto Scan - Stage 2{% endblock %}
 
@@ -10,11 +9,12 @@
     <li class="breadcrumb-item active" aria-current="page">Nikto</li>
   </ol>
 </nav>
+
 <div class="container mt-4">
   <h2 class="mb-4">Nikto Scan</h2>
   <form method="POST" action="{{ url_for('main_routes.scan') }}">
     {{ form.hidden_tag() }}
-    
+
     <input type="hidden" name="tool" value="nikto">
 
     <div class="form-group mb-3">
@@ -22,6 +22,7 @@
       {{ form.target(class="form-control", placeholder="e.g., http://example.com") }}
     </div>
 
+    <!-- Hide Nikto options (if not used) -->
     <div class="form-group mb-3" style="display: none;">
       <label class="form-label">{{ form.nikto_options.label }}</label>
       <div class="row">
@@ -41,5 +42,19 @@
       {{ form.submit(class="btn btn-danger") }}
     </div>
   </form>
+
+  <!-- Educational Content Section -->
+  <div class="alert alert-info mt-4">
+    <h5 class="alert-heading">💡 About Nikto in Stage 2</h5>
+    <p>
+      In Stage 2, Nikto is used to **actively scan web servers for known vulnerabilities**. It checks for outdated software, misconfigurations, default files, and other security issues.
+    </p>
+    <p>
+      Nikto complements other scanning tools by focusing specifically on web server issues, providing detailed insights and actionable reports.
+    </p>
+    <p class="mb-0">
+      <strong>Reminder:</strong> Use Nikto with proper authorization and awareness of potential impact on the target systems.
+    </p>
+  </div>
 </div>
 {% endblock %}

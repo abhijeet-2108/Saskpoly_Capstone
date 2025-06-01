@@ -8,16 +8,23 @@
     <li class="breadcrumb-item active" aria-current="page">Scanning & Enumeration</li>
   </ol>
 </nav>
+
 <h2 class="mb-4">🔎 Scanning & Enumeration</h2>
+
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
   <!-- Nmap -->
   <div class="col">
     <div class="card h-100 shadow-sm">
-      <div class="card-body">
+      <div class="card-body d-flex flex-column">
         <h5 class="card-title">🛰️ Nmap</h5>
-        <p class="card-text">Advanced port scanning, OS and service detection.</p>
-        <a href="{{ url_for('main_routes.stage2_nmap') }}" class="btn btn-primary">Launch Nmap</a>
+        <p class="card-text mb-2">
+          Advanced port scanning, OS and service detection.<br>
+          <span class="text-muted small">
+            Nmap’s capabilities in stage 2 go beyond basic host discovery — it’s used to perform version detection, OS fingerprinting, and more detailed vulnerability checks, providing a comprehensive map of network services.
+          </span>
+        </p>
+        <a href="{{ url_for('main_routes.stage2_nmap') }}" class="btn btn-primary mt-auto">Launch Nmap</a>
       </div>
     </div>
   </div>
@@ -25,32 +32,47 @@
   <!-- Nikto -->
   <div class="col">
     <div class="card h-100 shadow-sm">
-      <div class="card-body">
+      <div class="card-body d-flex flex-column">
         <h5 class="card-title">🛡️ Nikto</h5>
-        <p class="card-text">Web server vulnerability scanner.</p>
-        <a href="{{ url_for('main_routes.stage2_nikto') }}" class="btn btn-primary ">Launch Nikto</a>
+        <p class="card-text mb-2">
+          Web server vulnerability scanner.<br>
+          <span class="text-muted small">
+            Nikto is a powerful tool to identify potential issues in web servers, such as outdated software, dangerous files, and known vulnerabilities. It’s an essential step to harden your web infrastructure.
+          </span>
+        </p>
+        <a href="{{ url_for('main_routes.stage2_nikto') }}" class="btn btn-primary mt-auto">Launch Nikto</a>
       </div>
     </div>
   </div>
 
-  <!-- Coming Soon: Enum4Linux -->
+  <!-- Masscan -->
   <div class="col">
     <div class="card h-100 shadow-sm">
-      <div class="card-body">
+      <div class="card-body d-flex flex-column">
         <h5 class="card-title">🧾 Masscan</h5>
-        <p class="card-text">Ultra-fast port scanner capable of scanning the entire internet in seconds</p>
-        <button class="btn btn-secondary" disabled>Coming Soon</button>
+        <p class="card-text mb-2">
+          Ultra-fast port scanner capable of scanning the entire internet in seconds.<br>
+          <span class="text-muted small">
+            Masscan is known for its incredible speed, making it suitable for large-scale scanning. However, use it cautiously to avoid overwhelming networks and to stay within legal boundaries.
+          </span>
+        </p>
+        <button class="btn btn-secondary mt-auto" disabled>Coming Soon</button>
       </div>
     </div>
   </div>
 
-  <!-- Coming Soon: Gobuster -->
+  <!-- DirBuster -->
   <div class="col">
     <div class="card h-100 shadow-sm">
-      <div class="card-body">
+      <div class="card-body d-flex flex-column">
         <h5 class="card-title">🗂️ DirBuster</h5>
-        <p class="card-text">- Directory brute-forcing tool for uncovering hidden web paths and files.</p>
-        <button class="btn btn-secondary" disabled>Coming Soon</button>
+        <p class="card-text mb-2">
+          Directory brute-forcing tool for uncovering hidden web paths and files.<br>
+          <span class="text-muted small">
+            DirBuster can reveal sensitive directories and files not intended for public access, aiding in web application security assessments.
+          </span>
+        </p>
+        <button class="btn btn-secondary mt-auto" disabled>Coming Soon</button>
       </div>
     </div>
   </div>
