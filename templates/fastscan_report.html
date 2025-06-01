@@ -16,7 +16,7 @@
 
   <h4 class="mt-4">Nmap Findings</h4>
     {% if findings.nmap.ip and findings.nmap.ip != 'Not found' %}
-        <p><strong>IP:</strong> {{ findings.nmap.ip }}</p>
+        <p><strong>IP:</strong>{{ scan.target }} || {{ findings.nmap.ip }}</p>
         {% else %}
         <p><strong>IP:</strong> Not found</p>
     {% endif %}
