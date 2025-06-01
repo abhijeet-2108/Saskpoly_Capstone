@@ -39,16 +39,30 @@
     {% endif %}
 
 
-  <h4 class="mt-4">Whois Information</h4>
-  <ul>
+<h4 class="mt-4">Whois Information</h4>
+<ul>
     <li><strong>Domain:</strong> {{ findings.whois.domain_name or 'N/A' }}</li>
     <li><strong>Registrar:</strong> {{ findings.whois.registrar or 'N/A' }}</li>
     <li><strong>Creation Date:</strong> {{ findings.whois.creation_date or 'N/A' }}</li>
     <li><strong>Expiry Date:</strong> {{ findings.whois.expiry_date or 'N/A' }}</li>
+    <li><strong>Updated Date:</strong> {{ findings.whois.updated_date or 'N/A' }}</li>
     <li><strong>Registrant Organization:</strong> {{ findings.whois.registrant_organization or 'N/A' }}</li>
-    <li><strong>Country:</strong> {{ findings.whois.registrant_country or 'N/A' }}</li>
+    <li><strong>Registrant Country:</strong> {{ findings.whois.registrant_country or 'N/A' }}</li>
+    <li><strong>Registrant Email:</strong> {{ findings.whois.registrant_email or 'N/A' }}</li>
+    <li><strong>Registrant Phone:</strong> {{ findings.whois.registrant_phone or 'N/A' }}</li>
+    <li><strong>Admin Email:</strong> {{ findings.whois.admin_email or 'N/A' }}</li>
+    <li><strong>Admin Phone:</strong> {{ findings.whois.admin_phone or 'N/A' }}</li>
+    <li><strong>Tech Email:</strong> {{ findings.whois.tech_email or 'N/A' }}</li>
+    <li><strong>Tech Phone:</strong> {{ findings.whois.tech_phone or 'N/A' }}</li>
+    <li><strong>Billing Email:</strong> {{ findings.whois.billing_email or 'N/A' }}</li>
+    <li><strong>Billing Phone:</strong> {{ findings.whois.billing_phone or 'N/A' }}</li>
+    <li><strong>Registrar Abuse Contact Email:</strong> {{ findings.whois.registrar_abuse_contact_email or 'N/A' }}</li>
+    <li><strong>Registrar Abuse Contact Phone:</strong> {{ findings.whois.registrar_abuse_contact_phone or 'N/A' }}</li>
+    <li><strong>DNSSEC:</strong> {{ findings.whois.dnssec or 'N/A' }}</li>
+    <li><strong>Reseller:</strong> {{ findings.whois.reseller or 'N/A' }}</li>
+    <li><strong>ICANN URL:</strong> {{ findings.whois.icann_url or 'N/A' }}</li>
     <li><strong>Name Servers:</strong> {{ findings.whois.name_servers|join(', ') or 'N/A' }}</li>
     <li><strong>Status:</strong> {{ findings.whois.status|join(', ') or 'N/A' }}</li>
-  </ul>
+</ul>
 </div>
 {% endblock %}
