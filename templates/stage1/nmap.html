@@ -12,7 +12,7 @@
 
 <div class="container mt-4">
   <h2 class="mb-4">Nmap Scan</h2>
-  <form method="POST" action="{{ url_for('main_routes.scan') }}">
+  <form method="POST" action="{{ url_for('main_routes.scan') }}" id="form">
     {{ form.hidden_tag() }}
 
     <!-- Set the tool field to "nmap" correctly -->
