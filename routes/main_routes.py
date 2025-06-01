@@ -19,6 +19,7 @@ from pentesting.nikto_scan import run_nikto_scan
 from pentesting.hydra_scan import run_hydra_scan
 from pentesting.netcat_scan import run_netcat
 from pentesting.report_pdf import generate_pdf_report
+from pentesting.fastscan_parser import parse_combined_fastscan_output
 
 main_routes = Blueprint('main_routes', __name__)
 
