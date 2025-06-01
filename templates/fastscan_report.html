@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Fast Scan Report{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="{{ url_for('main_routes.fastscan_reports') }}">Fast Scan Reports</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Report</li>
+  </ol>
+</nav>
+
+<div class="container mt-4">
+  <h2>Fast Scan Report for {{ scan.target }}</h2>
+  <p><strong>Scan Date:</strong> {{ scan.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+
+  <h4 class="mt-4">Nmap Findings</h4>
+  <p><strong>IP:</strong> {{ findings.nmap.ip or 'N/A' }}</p>
+  <p><strong>OS:</strong> {{ findings.nmap.os or 'N/A' }}</p>
+  <h5>Open Ports</h5>
+  {% if findings.nmap.ports %}
+    <ul>
+      {% for port in findings.nmap.ports %}
+        <li>{{ port.port }} - {{ port.service }} ({{ port.version }})</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No open ports found.</p>
+  {% endif %}
+
+  <h4 class="mt-4">Whois Information</h4>
+  <ul>
+    <li><strong>Domain:</strong> {{ findings.whois.domain_name or 'N/A' }}</li>
+    <li><strong>Registrar:</strong> {{ findings.whois.registrar or 'N/A' }}</li>
+    <li><strong>Creation Date:</strong> {{ findings.whois.creation_date or 'N/A' }}</li>
+    <li><strong>Expiry Date:</strong> {{ findings.whois.expiry_date or 'N/A' }}</li>
+    <li><strong>Registrant Organization:</strong> {{ findings.whois.registrant_organization or 'N/A' }}</li>
+    <li><strong>Country:</strong> {{ findings.whois.registrant_country or 'N/A' }}</li>
+    <li><strong>Name Servers:</strong> {{ findings.whois.name_servers|join(', ') or 'N/A' }}</li>
+    <li><strong>Status:</strong> {{ findings.whois.status|join(', ') or 'N/A' }}</li>
+  </ul>
+</div>
+{% endblock %}

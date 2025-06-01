@@ -94,11 +94,29 @@ def scan():
 
     return redirect(url_for('main_routes.history'))
 
+@main_routes.route('/fastscan-reports')
+def fastscan_reports():
+    # Only get fast scan entries
+    scans = Scan.query.filter_by(tool_used='fast_scan').order_by(Scan.timestamp.desc()).all()
+    return render_template('fastscan_reports.html', scans=scans)
+
+@main_routes.route('/fastscan-report/<int:scan_id>')
+def fastscan_report(scan_id):
+    scan = Scan.query.get_or_404(scan_id)
+
+    # Parse the combined output
+    final_findings = parse_combined_fastscan_output(scan.scan_output)
+    return render_template('fastscan_report.html', findings=final_findings, scan=scan)
+
+
 @main_routes.route("/fastscan", methods=["GET", "POST"])
 def fast_scan():
     form = ScanForm()
 
-    if request.method == "POST" and form.validate_on_submit():
+    if request.method == "POST":
+        print("post request recieved")
+        if form.validate_on_submit():
+            print("form validated")
         target = form.target.data
 
         if not target:

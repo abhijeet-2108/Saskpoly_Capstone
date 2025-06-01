@@ -11,7 +11,7 @@
 
 <div class="container mt-4">
   <h2 class="mb-4">⚡ Fast Scan Tool</h2>
-  <form method="POST" action="{{ url_for('main_routes.fast_scan') }}">
+  <form method="POST" action="{{ url_for('main_routes.fast_scan') }}" id="fastscan-form">
     {{ form.hidden_tag() }}
 
     <div class="form-group mb-3">
@@ -24,11 +24,64 @@
     </div>
   </form>
 
+  <!-- Loading Spinner Overlay -->
+  <div id="loading-overlay" style="display: none;">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="mt-2">Scan in progress...</p>
+  </div>
+
+  <!-- Educational Content Section -->
+  <div class="alert alert-info mt-4">
+    <h5 class="alert-heading">💡 What is the Fast Scan?</h5>
+    <p>
+      The Fast Scan feature quickly gathers essential information about a target system using a combination of
+      <strong>Nmap</strong> and <strong>Whois</strong> scans.
+    </p>
+    <p>
+      🔍 <strong>Nmap:</strong> This scan identifies open ports and operating system details using a stealth scan (<code>-sS</code>) and OS detection (<code>-O</code>).
+    </p>
+    <p>
+      🌐 <strong>Whois:</strong> This query fetches registration and ownership information about the domain or IP address.
+    </p>
+    <p>
+      This integrated approach provides a rapid yet informative snapshot of your target's footprint, helping you kick-start your reconnaissance or troubleshooting efforts.
+    </p>
+    <p class="mb-0">
+      <strong>Important:</strong> Use this tool responsibly and only scan systems you have explicit permission to probe.
+    </p>
+  </div>
+
   {% if result %}
     <div class="alert alert-info mt-4">
       <h5>Scan Result:</h5>
-      <p>{{ result }}</p>
+      <pre>{{ result }}</pre>
     </div>
   {% endif %}
 </div>
+
+<!-- Loading Spinner Styles -->
+<style>
+  #loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
+
+<!-- Loading Spinner Logic -->
+<script>
+  document.getElementById('fastscan-form').addEventListener('submit', function() {
+    document.getElementById('loading-overlay').style.display = 'flex';
+  });
+</script>
 {% endblock %}

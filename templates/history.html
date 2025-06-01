@@ -14,10 +14,16 @@
     <ul>
       {% for scan in scans %}
         <li>
-          <a href="{{ url_for('main_routes.scan_detail', scan_id=scan.id) }}">
-            {{ scan.timestamp.strftime('%Y-%m-%d %H:%M:%S') }} - {{ scan.tool_used }} on {{ scan.target }}
-          </a>
-        </li>
+      {% if scan.tool_used == "fast_scan" %}
+        <a href="{{ url_for('main_routes.fastscan_report', scan_id=scan.id) }}">
+          {{ scan.timestamp.strftime('%Y-%m-%d %H:%M:%S') }} - {{ scan.tool_used }} on {{ scan.target }}
+        </a>
+      {% else %}
+        <a href="{{ url_for('main_routes.scan_detail', scan_id=scan.id) }}">
+          {{ scan.timestamp.strftime('%Y-%m-%d %H:%M:%S') }} - {{ scan.tool_used }} on {{ scan.target }}
+        </a>
+      {% endif %}
+    </li>
       {% endfor %}
     </ul>
   {% else %}
