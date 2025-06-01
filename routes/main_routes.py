@@ -94,6 +94,28 @@ def scan():
 
     return redirect(url_for('main_routes.history'))
 
+@main_routes.route('/fast-scan', methods=['POST'])
+def fast_scan():
+    target = request.form.get('target')
+    if not target:
+        return "No target specified", 400
+
+    # Run Nmap scan with basic options
+    nmap_output = run_nmap_scan(target, options=['-sS', '-O'])  # Example: Stealth and OS detection
+
+    # Run Whois scan
+    whois_output = run_whois_scan(target)
+
+    # Combine outputs
+    combined_output = f"--- Nmap Scan ---\n{nmap_output}\n\n--- Whois Info ---\n{whois_output}"
+
+    # Save to database
+    scan = Scan(target=target, tool_used='fast_scan', scan_output=combined_output)
+    db.session.add(scan)
+    db.session.commit()
+
+    return redirect(url_for('main_routes.history'))
+
 
 @main_routes.route('/history')
 def history():
