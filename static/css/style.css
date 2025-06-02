@@ -29,7 +29,7 @@
 }
 
 body {
-    background-image: url(bg.jpg);
+    /* background-image: url(bg.jpg); */
     font-family: 'Segoe UI', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
