@@ -21,6 +21,7 @@ from pentesting.netcat_scan import run_netcat
 from pentesting.report_pdf import generate_pdf_report
 from pentesting.fastscan_parser import parse_combined_fastscan_output
 from pentesting.masscan_scan import run_masscan_scan
+from pentesting.gobuster_scan import run_gobuster_scan
 
 main_routes = Blueprint('main_routes', __name__)
 
@@ -90,6 +91,9 @@ def scan():
         subnet = form.masscan_subnet.data == "subnet"
         port_range = form.masscan_ports.data
         output = run_masscan_scan(target, subnet, port_range)
+    elif tool == 'gobuster':
+        scan_level = request.form.get("gobuster_scan_level")
+        output = run_gobuster_scan(target, scan_level)
     else:
         return "Unsupported tool", 400
 
@@ -211,6 +215,11 @@ def stage2_nikto():
 def stage1_masscan():
     form = ScanForm()
     return render_template('stage2/masscan.html', form=form)
+
+@main_routes.route('/stage2/gobuster', methods=['GET', 'POST'], endpoint='stage2_gobuster')
+def stage1_gobuster():
+    form = ScanForm()
+    return render_template('stage2/gobuster.html', form=form)
 
 @main_routes.route('/stage2', methods=['GET'], endpoint='stage2')
 def stage2_index():
