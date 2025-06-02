@@ -20,6 +20,7 @@ from pentesting.hydra_scan import run_hydra_scan
 from pentesting.netcat_scan import run_netcat
 from pentesting.report_pdf import generate_pdf_report
 from pentesting.fastscan_parser import parse_combined_fastscan_output
+from pentesting.masscan_scan import run_masscan_scan
 
 main_routes = Blueprint('main_routes', __name__)
 
@@ -85,7 +86,10 @@ def scan():
         listener_ip = request.form.get("netcat_listener_ip") if mode == "reverse" else None
 
         output = run_netcat(target, port, mode, listener_ip)
-    
+    elif tool == 'masscan':
+        subnet = form.masscan_subnet.data == "subnet"
+        port_range = form.masscan_ports.data
+        output = run_masscan_scan(target, subnet, port_range)
     else:
         return "Unsupported tool", 400
 
@@ -203,6 +207,10 @@ def stage2_nikto():
     form = ScanForm()
     form.nikto_options.data = []
     return render_template('stage2/nikto.html', form=form)
+@main_routes.route('/stage2/masscan', methods=['GET'], endpoint='stage2_masscan')
+def stage1_masscan():
+    form = ScanForm()
+    return render_template('stage2/masscan.html', form=form)
 
 @main_routes.route('/stage2', methods=['GET'], endpoint='stage2')
 def stage2_index():

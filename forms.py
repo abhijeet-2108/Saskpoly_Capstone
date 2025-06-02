@@ -20,7 +20,8 @@ class ScanForm(FlaskForm):
         ("nikto", "Nikto"),
         ("hydra", "Hydra"),
         ("netcat", "Netcat"),
-        ("fastscan", "Fast Scan")
+        ("fastscan", "Fast Scan"),
+        ("masscan", "Masscan")
     ])
 
     nmap_options = SelectMultipleField(
@@ -32,6 +33,25 @@ class ScanForm(FlaskForm):
             ("-Pn", "Skip Host Discovery (-Pn)")
         ],
         validate_choice=False
+    )
+
+    masscan_subnet = SelectField(
+        "Scan Scope",
+        choices=[
+            ("single", "Single IP"),
+            ("subnet", "Entire /24 Subnet")
+        ],
+        default="single"
+    )
+
+    masscan_ports = SelectField(
+        "Port Range",
+        choices=[
+            ("all", "All Ports (0-65535)"),
+            ("top1000", "Top 1-1000 Ports"),
+            ("22,80,443", "Common Ports (22, 80, 443)")
+        ],
+        default="top1000"
     )
 
     sqlmap_options = SelectMultipleField(
