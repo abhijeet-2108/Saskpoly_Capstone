@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Wfuzz Scan{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/stage2">Scanning & Enumeration</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Wfuzz</li>
+  </ol>
+</nav>
+
+<div class="container mt-4">
+  <h2 class="mb-4">Wfuzz Scan</h2>
+  <form method="POST" action="{{ url_for('main_routes.scan') }}" id="form">
+    {{ form.hidden_tag() }}
+
+    <input type="hidden" name="tool" value="wfuzz">
+
+    <div class="form-group mb-3">
+      {{ form.target.label(class="form-label") }}
+      {{ form.target(class="form-control", placeholder="e.g., 10.0.0.1 or example.com") }}
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="scan_level" class="form-label">Scan Level</label>
+      <select class="form-select" name="wfuzz_scan_level" id="scan_level" required>
+        <option value="normal">Normal (Fast & Basic)</option>
+        <option value="advanced">Advanced (Bigger Wordlist)</option>
+        <option value="extreme">Extreme (Large & Aggressive)</option>
+      </select>
+    </div>
+
+    <div class="form-group mt-4">
+      {{ form.submit(class="btn btn-primary") }}
+    </div>
+  </form>
+
+  <div class="alert alert-info mt-4">
+    <h5 class="alert-heading">💡 About Wfuzz</h5>
+    <p>
+      Wfuzz is a powerful web application brute-forcer. It helps uncover hidden directories, parameters, and vulnerabilities.
+    </p>
+    <p>
+      ⚠️ <strong>Use responsibly. Unauthorized scanning is illegal and unethical.</strong>
+    </p>
+  </div>
+</div>
+
+<!-- Loading Spinner Logic -->
+<script>
+  document.getElementById('form').addEventListener('submit', function() {
+    document.getElementById('loading-overlay').style.display = 'flex';
+  });
+</script>
+
+<!-- Loading Spinner Overlay -->
+<div id="loading-overlay" style="display: none;">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <p class="mt-2">Scan in progress...</p>
+</div>
+
+<style>
+  #loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
+{% endblock %}

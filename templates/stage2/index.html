@@ -77,5 +77,20 @@
     </div>
   </div>
 
+  <!-- Wfuzz -->
+  <div class="col">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">🌐 Wfuzz</h5>
+        <p class="card-text mb-2">
+          Web application fuzzer for discovering hidden parameters, directories, and more.<br>
+          <span class="text-muted small">
+            Wfuzz is ideal for discovering directories, parameters, and files in web applications. Use it with caution and legal authorization.
+          </span>
+        </p>
+        <a href="{{ url_for('main_routes.stage2_wfuzz') }}" class="btn btn-primary mt-auto">Launch Wfuzz</a>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

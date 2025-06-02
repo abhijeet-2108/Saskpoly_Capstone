@@ -22,7 +22,8 @@ class ScanForm(FlaskForm):
         ("netcat", "Netcat"),
         ("fastscan", "Fast Scan"),
         ("masscan", "Masscan"),
-        ("gobuster","GoBuster")
+        ("gobuster","GoBuster"),
+        ("wfuzz", "Wfuzz")
     ])
 
     nmap_options = SelectMultipleField(

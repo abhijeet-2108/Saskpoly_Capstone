@@ -22,6 +22,7 @@ from pentesting.report_pdf import generate_pdf_report
 from pentesting.fastscan_parser import parse_combined_fastscan_output
 from pentesting.masscan_scan import run_masscan_scan
 from pentesting.gobuster_scan import run_gobuster_scan
+from pentesting.wfuzz_scan import run_wfuzz_scan
 
 main_routes = Blueprint('main_routes', __name__)
 
@@ -94,6 +95,9 @@ def scan():
     elif tool == 'gobuster':
         scan_level = request.form.get("gobuster_scan_level")
         output = run_gobuster_scan(target, scan_level)
+    elif tool == 'wfuzz':
+        scan_level = request.form.get("wfuzz_scan_level")
+        output = run_wfuzz_scan(target, scan_level)
     else:
         return "Unsupported tool", 400
 
@@ -220,6 +224,11 @@ def stage1_masscan():
 def stage1_gobuster():
     form = ScanForm()
     return render_template('stage2/gobuster.html', form=form)
+
+@main_routes.route('/stage2/wfuzz', methods=['GET', 'POST'], endpoint='stage2_wfuzz')
+def stage2_wfuzz():
+    form = ScanForm()
+    return render_template('stage2/wfuzz.html', form=form)
 
 @main_routes.route('/stage2', methods=['GET'], endpoint='stage2')
 def stage2_index():
