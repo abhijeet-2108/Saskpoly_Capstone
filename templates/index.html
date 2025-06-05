@@ -24,89 +24,178 @@
 
   <h2 class="mb-4 text-center">Penetration Testing Tools</h2>
 
-  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
+  <div class="container">
+    <h4 class="mb-4 text-center">Quick Scan Tool</h4>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
 
-    <!-- Stage 1: Reconnaissance -->
-    <div class="col">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">Reconnaissance</h5>
-          <p class="card-text">Gather information about the target using OSINT tools.</p>
-          <a href="/stage1" class="btn btn-primary">Open Reconnaissance Tools</a>
+      <!-- Stage 1: Reconnaissance -->
+      <!-- <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Reconnaissance</h5>
+            <p class="card-text">Gather information about the target using OSINT tools.</p>
+            <a href="/stage1" class="btn btn-primary">Open Reconnaissance Tools</a>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Stage 2: Scanning & Enumeration -->
+      <!-- <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Scanning & Enumeration</h5>
+            <p class="card-text">Find open ports and discover vulnerable services.</p>
+              <a href="/stage2" class="btn btn-primary">Open Scanning Tools</a>
+
+             <ul class="list-unstyled">
+              <li><a href="{{ url_for('main_routes.stage2_nmap') }}">🔎 Nmap</a></li>
+              <li><a href="{{ url_for('main_routes.stage2_nikto') }}">🌐 Nikto</a></li>
+              <li><a href="{{ url_for('main_routes.stage2') }}">📁 More Scanning Tools</a></li>
+            </ul> -->
+          <!-- </div> -->
+        <!-- </div> -->
+      <!-- </div> --> 
+
+      <!-- Stage 3: Gaining Access -->
+      <!-- <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">3. Gaining Access</h5>
+            <p class="card-text">Exploit vulnerabilities to gain access to the system.</p>
+            <ul class="list-unstyled">
+              <li><a href="{{ url_for('main_routes.stage3_sqlmap') }}" class="disabled">💉 SQLMap</a></li>
+              <li><a href="" class="text-muted disabled">🔐 Hydra (Coming Soon)</a></li> 
+              <li><a href="{{ url_for('main_routes.stage3_hydra') }}" class="">🔐 Hydra</a></li>
+              <li><a href="#" class="text-muted disabled">🚪 Metasploit (Coming Soon)</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Stage 4: Maintaining Access -->
+      <!-- <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">4. Maintaining Access</h5>
+            <p class="card-text">Establish persistence within the compromised system.</p>
+            <ul class="list-unstyled">
+              <li><a href="#" class="text-muted disabled">🕳️ Netcat (Coming Soon)</a></li>
+              <li><a href="#" class="text-muted disabled">🧠 Weevely (Coming Soon)</a></li>
+              <li><a href="#" class="text-muted disabled">📌 SSH Backdoor (Coming Soon)</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Stage 5: Reporting -->
+      <!-- <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Reports Viewer</h5>
+            <p class="card-text">Compile your findings and generate structured reports.</p>
+              <!-- <li><a href="#" class="text-muted disabled">🗒️ Dradis (Coming Soon)</a></li>
+              <li><a href="#" class="text-muted disabled">📄 Markdown → PDF (Coming Soon)</a></li> -->
+              <!-- <a href="/history" class="btn btn-primary ">Report Viewer</a> -->
+          <!-- </div> -->
+        <!-- </div> -->
+      <!-- </div> --> 
+
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">⚡ Fast Scan Tool</h5>
+            <p class="card-text">Quickly perform basic scans (Nmap & Whois) for a target IP or URL.</p>
+            <a href="{{ url_for('main_routes.fast_scan') }}" class="btn btn-success">Open Fast Scan Tool</a>
+          </div>
         </div>
       </div>
     </div>
+    <h4 class="mb-4 text-center">Deep Scan Tools</h4>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
 
-    <!-- Stage 2: Scanning & Enumeration -->
-    <div class="col">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">Scanning & Enumeration</h5>
-          <p class="card-text">Find open ports and discover vulnerable services.</p>
-            <a href="/stage2" class="btn btn-primary">Open Scanning Tools</a>
-
-          <!-- <ul class="list-unstyled">
-            <li><a href="{{ url_for('main_routes.stage2_nmap') }}">🔎 Nmap</a></li>
-            <li><a href="{{ url_for('main_routes.stage2_nikto') }}">🌐 Nikto</a></li>
-            <li><a href="{{ url_for('main_routes.stage2') }}">📁 More Scanning Tools</a></li>
-          </ul> -->
+      <!-- Stage 1: Reconnaissance -->
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Reconnaissance</h5>
+            <p class="card-text">Gather information about the target using OSINT tools.</p>
+            <a href="/stage1" class="btn btn-primary">Open Reconnaissance Tools</a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Stage 3: Gaining Access -->
-    <!-- <div class="col">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">3. Gaining Access</h5>
-          <p class="card-text">Exploit vulnerabilities to gain access to the system.</p>
-          <ul class="list-unstyled">
-            <li><a href="{{ url_for('main_routes.stage3_sqlmap') }}" class="disabled">💉 SQLMap</a></li>
-             <li><a href="" class="text-muted disabled">🔐 Hydra (Coming Soon)</a></li> 
-            <li><a href="{{ url_for('main_routes.stage3_hydra') }}" class="">🔐 Hydra</a></li>
-            <li><a href="#" class="text-muted disabled">🚪 Metasploit (Coming Soon)</a></li>
-          </ul>
+      <!-- Stage 2: Scanning & Enumeration -->
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Scanning & Enumeration</h5>
+            <p class="card-text">Find open ports and discover vulnerable services.</p>
+              <a href="/stage2" class="btn btn-primary">Open Scanning Tools</a>
+
+            <!-- <ul class="list-unstyled">
+              <li><a href="{{ url_for('main_routes.stage2_nmap') }}">🔎 Nmap</a></li>
+              <li><a href="{{ url_for('main_routes.stage2_nikto') }}">🌐 Nikto</a></li>
+              <li><a href="{{ url_for('main_routes.stage2') }}">📁 More Scanning Tools</a></li>
+            </ul> -->
+          </div>
         </div>
       </div>
-    </div> -->
 
-    <!-- Stage 4: Maintaining Access -->
-    <!-- <div class="col">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">4. Maintaining Access</h5>
-          <p class="card-text">Establish persistence within the compromised system.</p>
-          <ul class="list-unstyled">
-            <li><a href="#" class="text-muted disabled">🕳️ Netcat (Coming Soon)</a></li>
-            <li><a href="#" class="text-muted disabled">🧠 Weevely (Coming Soon)</a></li>
-            <li><a href="#" class="text-muted disabled">📌 SSH Backdoor (Coming Soon)</a></li>
-          </ul>
+      <!-- Stage 3: Gaining Access -->
+      <!-- <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">3. Gaining Access</h5>
+            <p class="card-text">Exploit vulnerabilities to gain access to the system.</p>
+            <ul class="list-unstyled">
+              <li><a href="{{ url_for('main_routes.stage3_sqlmap') }}" class="disabled">💉 SQLMap</a></li>
+              <li><a href="" class="text-muted disabled">🔐 Hydra (Coming Soon)</a></li> 
+              <li><a href="{{ url_for('main_routes.stage3_hydra') }}" class="">🔐 Hydra</a></li>
+              <li><a href="#" class="text-muted disabled">🚪 Metasploit (Coming Soon)</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Stage 4: Maintaining Access -->
+      <!-- <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">4. Maintaining Access</h5>
+            <p class="card-text">Establish persistence within the compromised system.</p>
+            <ul class="list-unstyled">
+              <li><a href="#" class="text-muted disabled">🕳️ Netcat (Coming Soon)</a></li>
+              <li><a href="#" class="text-muted disabled">🧠 Weevely (Coming Soon)</a></li>
+              <li><a href="#" class="text-muted disabled">📌 SSH Backdoor (Coming Soon)</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Stage 5: Reporting -->
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Reports Viewer</h5>
+            <p class="card-text">Compile your findings and generate structured reports.</p>
+              <!-- <li><a href="#" class="text-muted disabled">🗒️ Dradis (Coming Soon)</a></li>
+              <li><a href="#" class="text-muted disabled">📄 Markdown → PDF (Coming Soon)</a></li> -->
+              <a href="/history" class="btn btn-primary ">Report Viewer</a>
+          </div>
         </div>
       </div>
-    </div> -->
 
-    <!-- Stage 5: Reporting -->
-    <div class="col">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">Reports Viewer</h5>
-          <p class="card-text">Compile your findings and generate structured reports.</p>
-            <!-- <li><a href="#" class="text-muted disabled">🗒️ Dradis (Coming Soon)</a></li>
-            <li><a href="#" class="text-muted disabled">📄 Markdown → PDF (Coming Soon)</a></li> -->
-            <a href="/history" class="btn btn-primary ">Report Viewer</a>
+      <!-- <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">⚡ Fast Scan Tool</h5>
+            <p class="card-text">Quickly perform basic scans (Nmap & Whois) for a target IP or URL.</p>
+            <a href="{{ url_for('main_routes.fast_scan') }}" class="btn btn-success">Open Fast Scan Tool</a>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <div class="col">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">⚡ Fast Scan Tool</h5>
-          <p class="card-text">Quickly perform basic scans (Nmap & Whois) for a target IP or URL.</p>
-          <a href="{{ url_for('main_routes.fast_scan') }}" class="btn btn-success">Open Fast Scan Tool</a>
-        </div>
-      </div>
+      </div> -->
     </div>
   </div>
+    
 </div>
 {% endblock %}
