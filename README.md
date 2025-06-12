@@ -1,12 +1,12 @@
-# 🛡️ Pentesting Dashboard (Flask + SQLAlchemy)
+# 🛡️ Pentesting Portal (Flask + SQLAlchemy)
 
-A modular, self-hosted Flask-based dashboard to run and manage penetration testing tools in an organized way. Designed for students, security labs, and red teamers.
+A modular, self-hosted Flask-based portal to run and manage penetration testing tools in an organized way. Designed for students, security labs, and red teamers.
 
 ---
 
 ## 🌐 Overview
 
-The Pentesting Dashboard now organizes tools into **Quick Scan** and **Deep Scan** categories, streamlining the workflow and enabling more targeted scanning and enumeration.
+The Pentesting Portal now organizes tools into **Quick Scan** and **Deep Scan** categories, streamlining the workflow and enabling more targeted scanning and enumeration.
 
 ---
 
@@ -69,7 +69,7 @@ Each tool takes a target and optional command-line options as input.
 ## 📦 Project Structure
 
 ```
-pentesting-dashboard/
+pentesting-portal/
 ├── app.py
 ├── config.py
 ├── run.py
@@ -176,4 +176,4 @@ Visit: [http://127.0.0.1](http://127.0.0.1)
 
 ## ✍️ Author Notes
 
-Built as a capstone project for ethical hacking learners and lab environments. Designed for flexibility, extensibility, and real-world experimentation — this dashboard encourages hands-on exploration and skill-building.
+Built as a capstone project for ethical hacking learners and lab environments. Designed for flexibility, extensibility, and real-world experimentation — this portal encourages hands-on exploration and skill-building.
