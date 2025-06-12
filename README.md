@@ -142,7 +142,7 @@ sudo apt install python3 python3-pip python3-venv mysql-server libmysqlclient-de
 ### 2. Clone & Set Up Project
 
 ```bash
-git clone <your_repo_url>
+git clone https://github.com/abhijeet-2108/Saskpoly_Capstone.git
 cd pentesting-dashboard
 python3 -m venv venv
 source venv/bin/activate
